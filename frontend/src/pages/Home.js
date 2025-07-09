@@ -11,7 +11,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { categories, loading: categoriesLoading, error } = useSelector(state => state.category);
+  const { categories, loading: categoriesLoading } = useSelector(state => state.category);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [productsLoading, setProductsLoading] = useState(false);

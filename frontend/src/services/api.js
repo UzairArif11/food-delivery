@@ -1,8 +1,8 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 
 // Create axios instance
-const createApiInstance = (): AxiosInstance => {
+const createApiInstance = () => {
   const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
     timeout: 10000,
@@ -49,7 +49,7 @@ const createApiInstance = (): AxiosInstance => {
 const api = createApiInstance();
 
 // Generic request function
-const request = async <T>(config: AxiosRequestConfig): Promise<T> => {
+const request = async (config) => {
   try {
     const response = await api.request(config);
     return response.data;
@@ -59,24 +59,24 @@ const request = async <T>(config: AxiosRequestConfig): Promise<T> => {
 };
 
 // HTTP method functions
-export const get = async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
-  return request<T>({ ...config, method: 'GET', url });
+export const get = async (url, config) => {
+  return request({ ...config, method: 'GET', url });
 };
 
-export const post = async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
-  return request<T>({ ...config, method: 'POST', url, data });
+export const post = async (url, data, config) => {
+  return request({ ...config, method: 'POST', url, data });
 };
 
-export const put = async <T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
-  return request<T>({ ...config, method: 'PUT', url, data });
+export const put = async (url, data, config) => {
+  return request({ ...config, method: 'PUT', url, data });
 };
 
-export const del = async <T>(url: string, config?: AxiosRequestConfig): Promise<T> => {
-  return request<T>({ ...config, method: 'DELETE', url });
+export const del = async (url, config) => {
+  return request({ ...config, method: 'DELETE', url });
 };
 
-export const uploadFile = async <T>(url: string, formData: FormData, config?: AxiosRequestConfig): Promise<T> => {
-  return request<T>({
+export const uploadFile = async (url, formData, config) => {
+  return request({
     ...config,
     method: 'POST',
     url,

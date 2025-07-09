@@ -1,15 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { Category } from '../types';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import categoryService from '../services/categoryService';
 
-interface CategoryState {
-  categories: Category[];
-  selectedCategory: Category | null;
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: CategoryState = {
+const initialState = {
   categories: [],
   selectedCategory: null,
   loading: false,
@@ -23,7 +15,7 @@ export const fetchCategories = createAsyncThunk(
     try {
       const response = await categoryService.getCategories();
       return response.data || [];
-    } catch (error: any) {
+    } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch categories');
     }
   }
@@ -31,11 +23,11 @@ export const fetchCategories = createAsyncThunk(
 
 export const fetchCategoryById = createAsyncThunk(
   'category/fetchCategoryById',
-  async (id: string, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
       const response = await categoryService.getCategoryById(id);
       return response.data;
-    } catch (error: any) {
+    } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch category');
     }
   }
@@ -43,11 +35,11 @@ export const fetchCategoryById = createAsyncThunk(
 
 export const createCategory = createAsyncThunk(
   'category/createCategory',
-  async (categoryData: FormData, { rejectWithValue }) => {
+  async (categoryData, { rejectWithValue }) => {
     try {
       const response = await categoryService.createCategory(categoryData);
       return response.data;
-    } catch (error: any) {
+    } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to create category');
     }
   }
@@ -55,11 +47,11 @@ export const createCategory = createAsyncThunk(
 
 export const updateCategory = createAsyncThunk(
   'category/updateCategory',
-  async ({ id, categoryData }: { id: string; categoryData: FormData }, { rejectWithValue }) => {
+  async ({ id, categoryData }, { rejectWithValue }) => {
     try {
       const response = await categoryService.updateCategory(id, categoryData);
       return response.data;
-    } catch (error: any) {
+    } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to update category');
     }
   }
@@ -67,11 +59,11 @@ export const updateCategory = createAsyncThunk(
 
 export const deleteCategory = createAsyncThunk(
   'category/deleteCategory',
-  async (id: string, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
       await categoryService.deleteCategory(id);
       return id;
-    } catch (error: any) {
+    } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to delete category');
     }
   }
@@ -84,7 +76,7 @@ const categorySlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
-    setSelectedCategory: (state, action: PayloadAction<Category | null>) => {
+    setSelectedCategory: (state, action) => {
       state.selectedCategory = action.payload;
     },
   },
@@ -101,7 +93,7 @@ const categorySlice = createSlice({
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload;
       })
       
       // Fetch category by ID
@@ -115,7 +107,7 @@ const categorySlice = createSlice({
       })
       .addCase(fetchCategoryById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload;
       })
       
       // Create category
@@ -129,7 +121,7 @@ const categorySlice = createSlice({
       })
       .addCase(createCategory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload;
       })
       
       // Update category
@@ -149,7 +141,7 @@ const categorySlice = createSlice({
       })
       .addCase(updateCategory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload;
       })
       
       // Delete category
@@ -166,7 +158,7 @@ const categorySlice = createSlice({
       })
       .addCase(deleteCategory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string;
+        state.error = action.payload;
       });
   },
 });
