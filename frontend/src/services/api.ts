@@ -14,7 +14,7 @@ const createApiInstance = (): AxiosInstance => {
   // Request interceptor to add auth token
   api.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('adminToken');
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -30,7 +30,7 @@ const createApiInstance = (): AxiosInstance => {
       const { response } = error;
       
       if (response?.status === 401) {
-        localStorage.removeItem('token');
+        localStorage.removeItem('adminToken');
         localStorage.removeItem('admin');
         window.location.href = '/admin/login';
       }

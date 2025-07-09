@@ -1,42 +1,41 @@
-import { get, post, put, del, uploadFile } from './api';
-import { Product, ApiResponse } from '../types';
+import { get, del, uploadFile } from './api';
+import { Product } from '../types';
 
 // Get all products
-export const getProducts = async (categoryId?: string): Promise<ApiResponse<Product[]>> => {
-  const url = categoryId ? `/products?category=${categoryId}` : '/products';
-  return await get<ApiResponse<Product[]>>(url);
-};
-
-// Get products by category
-export const getProductsByCategory = async (categoryId: string): Promise<ApiResponse<Product[]>> => {
-  return await get<ApiResponse<Product[]>>(`/products/category/${categoryId}`);
+export const getProducts = async (): Promise<Product[]> => {
+  return await get<Product[]>('/products');
 };
 
 // Get product by ID
-export const getProductById = async (id: string): Promise<ApiResponse<Product>> => {
-  return await get<ApiResponse<Product>>(`/products/${id}`);
+export const getProductById = async (id: string): Promise<Product> => {
+  return await get<Product>(`/products/${id}`);
+};
+
+// Get products by category
+export const getProductsByCategory = async (categoryId: string): Promise<Product[]> => {
+  return await get<Product[]>(`/products/category/${categoryId}`);
 };
 
 // Create new product
-export const createProduct = async (productData: FormData): Promise<ApiResponse<Product>> => {
-  return await uploadFile<ApiResponse<Product>>('/products', productData);
+export const createProduct = async (productData: FormData): Promise<Product> => {
+  return await uploadFile<Product>('/products', productData);
 };
 
 // Update product
-export const updateProduct = async (id: string, productData: FormData): Promise<ApiResponse<Product>> => {
-  return await uploadFile<ApiResponse<Product>>(`/products/${id}`, productData);
+export const updateProduct = async (id: string, productData: FormData): Promise<Product> => {
+  return await uploadFile<Product>(`/products/${id}`, productData);
 };
 
 // Delete product
-export const deleteProduct = async (id: string): Promise<ApiResponse<void>> => {
-  return await del<ApiResponse<void>>(`/products/${id}`);
+export const deleteProduct = async (id: string): Promise<void> => {
+  return await del<void>(`/products/${id}`);
 };
 
 // Export as default object
 const productService = {
   getProducts,
-  getProductsByCategory,
   getProductById,
+  getProductsByCategory,
   createProduct,
   updateProduct,
   deleteProduct,

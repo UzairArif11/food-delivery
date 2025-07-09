@@ -1,15 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import categoryReducer from './categorySlice';
-// Import other slices
+import productReducer from './productSlice';
+import cartReducer from './cartSlice';
+import authReducer from './authSlice';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    category: categoryReducer,
-    // Add other reducers
+    categories: categoryReducer,
+    products: productReducer,
+    cart: cartReducer,
+    auth: authReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-export default store;
