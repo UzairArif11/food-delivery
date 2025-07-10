@@ -49,7 +49,7 @@ const CartPage: React.FC = () => {
             {/* Cart Items */}
             <div className="lg:col-span-2">
               <div className="space-y-4">
-                {items.map((item) => (
+                {items.map((item: any) => (
                   <motion.div
                     key={item.product._id}
                     initial={{ opacity: 0, y: 20 }}

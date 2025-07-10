@@ -33,11 +33,12 @@ const createApiInstance = (): AxiosInstance => {
         localStorage.removeItem('adminToken');
         localStorage.removeItem('admin');
         window.location.href = '/admin/login';
+        
+        const errorMessage = response?.data?.message || 'Session expired. Please login again.';
+        toast.error(errorMessage);
       }
       
-        const errorMessage = response?.data?.message || 'Something went wrong';
-        toast.error(errorMessage);
-      
+      // Let other errors be handled by the calling service
       return Promise.reject(error);
     }
   );

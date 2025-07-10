@@ -2,6 +2,7 @@ import React from 'react';
 import { Product } from '../types';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../store/cartSlice';
 import type { AppDispatch } from '../store';
 import ImageWithFallback from './ImageWithFallback';
@@ -14,16 +15,23 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click navigation
     dispatch(addToCart(product));
     toast.success(`${product.name} added to cart!`);
+  };
+
+  const handleCardClick = () => {
+    navigate(`/food/${product._id}`);
   };
 
   return (
     <motion.div
       whileHover={{ scale: 1.03 }}
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+      onClick={handleCardClick}
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
     >
         <div className="relative">
           <ImageWithFallback

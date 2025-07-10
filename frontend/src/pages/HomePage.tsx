@@ -69,11 +69,27 @@ const HomePage: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="w-full h-96 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg shadow-2xl flex items-center justify-center">
-                <div className="text-white text-center">
-                  <h3 className="text-4xl font-bold mb-2">🍕</h3>
-                  <p className="text-xl">Delicious Food</p>
+              <div 
+                className="w-full h-96 rounded-lg shadow-2xl overflow-hidden relative"
+                style={{
+                  backgroundImage: `url('/assets/images/fish-fillet-with-berry-sauce-cherry-tomatoes-chef-s-cuisine-created-with-ai 1.jpg')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat'
+                }}
+              >
+                {/* Gradient overlay for better text readability and visual appeal */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent flex items-center justify-center">
+                  <div className="text-white text-center p-6">
+                    <h3 className="text-4xl lg:text-5xl font-bold mb-3 drop-shadow-2xl">Delicious Food</h3>
+                    <p className="text-xl lg:text-2xl drop-shadow-lg font-medium">Made with Love</p>
+                    <div className="mt-4 w-20 h-1 bg-white mx-auto rounded-full opacity-80"></div>
+                  </div>
                 </div>
+                
+                {/* Decorative elements */}
+                <div className="absolute top-4 right-4 w-12 h-12 border-2 border-white/30 rounded-full"></div>
+                <div className="absolute bottom-4 left-4 w-8 h-8 border-2 border-white/20 rounded-full"></div>
               </div>
             </motion.div>
           </div>

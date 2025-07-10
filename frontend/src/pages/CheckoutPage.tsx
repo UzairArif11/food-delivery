@@ -9,7 +9,7 @@ const CheckoutPage: React.FC = () => {
 
   const handlePlaceOrder = () => {
     // Redirect to FoodPanda's checkout page
-    window.location.href = 'https://www.foodpanda.com/checkout';
+    window.location.href = 'https://foodpanda.page.link/jnQ94G2zQ1YiEKzn8';
   };
 
   return (

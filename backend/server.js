@@ -8,6 +8,7 @@ const path = require('path');
 const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -42,6 +43,7 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/food-orderi
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/contacts', contactRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

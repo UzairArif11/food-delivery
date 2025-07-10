@@ -53,6 +53,12 @@ const Header: React.FC = () => {
             >
               Contact
             </Link>
+            <Link
+              to="/orders"
+              className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
+            >
+              Orders
+            </Link>
           </nav>
 
           {/* Cart and Menu Button */}
@@ -124,6 +130,13 @@ const Header: React.FC = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
+              </Link>
+              <Link
+                to="/orders"
+                className="text-gray-700 hover:text-primary-600 font-medium transition-colors px-4 py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Orders
               </Link>
             </nav>
           </motion.div>

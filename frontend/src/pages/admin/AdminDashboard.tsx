@@ -7,13 +7,14 @@ import { fetchProducts, deleteProduct } from '../../store/productSlice';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import ImageWithFallback from '../../components/ImageWithFallback';
+import contactService from '../../services/contactService';
 
 const AdminDashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { categories, loading: categoriesLoading } = useSelector((state: RootState) => state.categories);
   const { products, loading: productsLoading } = useSelector((state: RootState) => state.products);
-  const [activeTab, setActiveTab] = useState<'categories' | 'products'>('categories');
+  const [activeTab, setActiveTab] = useState<'categories' | 'products' | 'contacts'>('categories');
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -97,6 +98,16 @@ const AdminDashboard: React.FC = () => {
             >
               Products ({products.length})
             </button>
+            <button
+              onClick={() => setActiveTab('contacts')}
+              className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                activeTab === 'contacts'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Contacts
+            </button>
           </nav>
         </div>
 
@@ -168,6 +179,45 @@ const AdminDashboard: React.FC = () => {
                 </ul>
               </div>
             )}
+          </motion.div>
+        )}
+
+        {/* Contacts Tab */}
+        {activeTab === 'contacts' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="space-y-4"
+          >
+            <div className="flex justify-between items-center">
+              <h2 className="text-lg font-medium text-gray-900">Contact Messages</h2>
+              <button
+                onClick={() => navigate('/admin/contacts')}
+                className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+              >
+                Manage Contacts
+              </button>
+            </div>
+            
+            <div className="bg-white shadow rounded-lg p-6">
+              <p className="text-gray-600 mb-4">
+                View and manage customer contact form submissions. You can update status, reply to messages, and track communication.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-yellow-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-semibold text-yellow-800">Pending</h3>
+                  <p className="text-yellow-600">New messages awaiting review</p>
+                </div>
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-semibold text-blue-800">In Progress</h3>
+                  <p className="text-blue-600">Messages being handled</p>
+                </div>
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-semibold text-green-800">Resolved</h3>
+                  <p className="text-green-600">Completed messages</p>
+                </div>
+              </div>
+            </div>
           </motion.div>
         )}
 
