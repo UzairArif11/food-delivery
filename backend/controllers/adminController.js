@@ -21,7 +21,7 @@ const loginAdmin = async (req, res) => {
     // Find admin by email
     const admin = await Admin.findOne({ email, isActive: true });
     if (!admin) {
-      return res.status(401).json({
+      return res.status(403).json({
         success: false,
         message: 'Invalid credentials'
       });
@@ -30,7 +30,7 @@ const loginAdmin = async (req, res) => {
     // Check password
     const isPasswordValid = await admin.comparePassword(password);
     if (!isPasswordValid) {
-      return res.status(401).json({
+      return res.status(403).json({
         success: false,
         message: 'Invalid credentials'
       });
@@ -218,7 +218,7 @@ const changePassword = async (req, res) => {
     // Check current password
     const isCurrentPasswordValid = await admin.comparePassword(currentPassword);
     if (!isCurrentPasswordValid) {
-      return res.status(401).json({
+      return res.status(403).json({
         success: false,
         message: 'Current password is incorrect'
       });

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Category } from '../types';
 import { motion } from 'framer-motion';
+import ImageWithFallback from './ImageWithFallback';
+import { getImageUrl } from '../utils/imageUtils';
 
 interface CategoryCardProps {
   category: Category;
@@ -16,8 +18,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
     >
       <Link to={`/menu?category=${category._id}`}>
         <div className="relative">
-          <img
-            src={category.image || '/assets/images/placeholder.jpg'}
+          <ImageWithFallback
+            src={getImageUrl(category.image)}
             alt={category.name}
             className="w-full h-48 object-cover"
           />

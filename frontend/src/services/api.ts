@@ -29,14 +29,14 @@ const createApiInstance = (): AxiosInstance => {
     (error) => {
       const { response } = error;
       
-      if (response?.status === 401) {
+      if (response?.status === 401 && window.location.href !== '/admin/login') {
         localStorage.removeItem('adminToken');
         localStorage.removeItem('admin');
         window.location.href = '/admin/login';
       }
       
-      const errorMessage = response?.data?.message || 'Something went wrong';
-      toast.error(errorMessage);
+        const errorMessage = response?.data?.message || 'Something went wrong';
+        toast.error(errorMessage);
       
       return Promise.reject(error);
     }
@@ -79,6 +79,18 @@ export const uploadFile = async <T>(url: string, formData: FormData, config?: Ax
   return request<T>({
     ...config,
     method: 'POST',
+    url,
+    data: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
+export const uploadFilePut = async <T>(url: string, formData: FormData, config?: AxiosRequestConfig): Promise<T> => {
+  return request<T>({
+    ...config,
+    method: 'PUT',
     url,
     data: formData,
     headers: {
