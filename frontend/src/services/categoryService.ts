@@ -1,29 +1,29 @@
 import { get, del, uploadFile } from './api';
-import { Category } from '../types';
+import { Category, ApiResponse } from '../types';
 
 // Get all categories
-export const getCategories = async (): Promise<Category[]> => {
-  return await get<Category[]>('/categories');
+export const getCategories = async (): Promise<ApiResponse<Category[]>> => {
+  return await get<ApiResponse<Category[]>>('/categories');
 };
 
 // Get category by ID
-export const getCategoryById = async (id: string): Promise<Category> => {
-  return await get<Category>(`/categories/${id}`);
+export const getCategoryById = async (id: string): Promise<ApiResponse<Category>> => {
+  return await get<ApiResponse<Category>>(`/categories/${id}`);
 };
 
 // Create new category
-export const createCategory = async (categoryData: FormData): Promise<Category> => {
-  return await uploadFile<Category>('/categories', categoryData);
+export const createCategory = async (categoryData: FormData): Promise<ApiResponse<Category>> => {
+  return await uploadFile<ApiResponse<Category>>('/categories', categoryData);
 };
 
 // Update category
-export const updateCategory = async (id: string, categoryData: FormData): Promise<Category> => {
-  return await uploadFile<Category>(`/categories/${id}`, categoryData);
+export const updateCategory = async (id: string, categoryData: FormData): Promise<ApiResponse<Category>> => {
+  return await uploadFile<ApiResponse<Category>>(`/categories/${id}`, categoryData);
 };
 
 // Delete category
-export const deleteCategory = async (id: string): Promise<void> => {
-  return await del<void>(`/categories/${id}`);
+export const deleteCategory = async (id: string): Promise<ApiResponse<void>> => {
+  return await del<ApiResponse<void>>(`/categories/${id}`);
 };
 
 // Export as default object

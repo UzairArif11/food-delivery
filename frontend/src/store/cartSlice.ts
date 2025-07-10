@@ -1,12 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartState, Product } from '../types';
 
-const initialState: CartState = {
-  items: [],
-  totalItems: 0,
-  totalPrice: 0,
-  isOpen: false,
+// Load cart from localStorage
+const loadCartFromStorage = (): CartState => {
+  try {
+    const cartData = localStorage.getItem('cart');
+    if (cartData) {
+      return JSON.parse(cartData);
+    }
+  } catch (error) {
+    console.error('Error loading cart from localStorage:', error);
+  }
+  return {
+    items: [],
+    totalItems: 0,
+    totalPrice: 0,
+    isOpen: false,
+  };
 };
+
+const initialState: CartState = loadCartFromStorage();
 
 const cartSlice = createSlice({
   name: 'cart',

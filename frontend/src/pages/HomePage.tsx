@@ -13,8 +13,8 @@ import LoadingSpinner from '../components/LoadingSpinner';
 
 const HomePage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { categories, loading: categoriesLoading } = useSelector((state: RootState) => state.categories);
-  const { products, loading: productsLoading } = useSelector((state: RootState) => state.products);
+  const { categories = [], loading: categoriesLoading } = useSelector((state: RootState) => state.categories || {});
+  const { products = [], loading: productsLoading } = useSelector((state: RootState) => state.products || {});
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
   }, [dispatch]);
 
   // Get featured products (first 6 products)
-  const featuredProducts = products.slice(0, 6);
+  const featuredProducts = Array.isArray(products) ? products.slice(0, 6) : [];
 
   return (
     <div className="min-h-screen bg-white">
@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
                 <LoadingSpinner />
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {categories.map((category, index) => (
+                  {Array.isArray(categories) && categories.length > 0 ? categories.map((category, index) => (
                     <motion.div
                       key={category._id}
                       initial={{ opacity: 0, y: 30 }}
@@ -110,7 +110,11 @@ const HomePage: React.FC = () => {
                     >
                       <CategoryCard category={category} />
                     </motion.div>
-                  ))}
+                  )) : (
+                    <div className="col-span-full text-center py-8">
+                      <p className="text-gray-500">No categories available</p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -137,7 +141,7 @@ const HomePage: React.FC = () => {
                 <LoadingSpinner />
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {featuredProducts.map((product, index) => (
+                  {Array.isArray(featuredProducts) && featuredProducts.length > 0 ? featuredProducts.map((product, index) => (
                     <motion.div
                       key={product._id}
                       initial={{ opacity: 0, y: 30 }}
@@ -146,7 +150,11 @@ const HomePage: React.FC = () => {
                     >
                       <ProductCard product={product} />
                     </motion.div>
-                  ))}
+                  )) : (
+                    <div className="col-span-full text-center py-8">
+                      <p className="text-gray-500">No products available</p>
+                    </div>
+                  )}
                 </div>
               )}
     

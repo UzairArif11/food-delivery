@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../store';
-import { toggleCart } from '../store/cartSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 import { motion } from 'framer-motion';
 
 const Header: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { totalItems } = useSelector((state: RootState) => state.cart);
 
   const handleCartClick = () => {
-    dispatch(toggleCart());
+    navigate('/cart');
   };
 
   return (

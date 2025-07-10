@@ -62,7 +62,7 @@ const categorySlice = createSlice({
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.loading = false;
-        state.categories = action.payload;
+        state.categories = action.payload.data || [];
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = false;
@@ -70,13 +70,17 @@ const categorySlice = createSlice({
       })
       // Create category
       .addCase(createCategory.fulfilled, (state, action) => {
-        state.categories.push(action.payload);
+        if (action.payload.data) {
+          state.categories.push(action.payload.data);
+        }
       })
       // Update category
       .addCase(updateCategory.fulfilled, (state, action) => {
-        const index = state.categories.findIndex(cat => cat._id === action.payload._id);
-        if (index !== -1) {
-          state.categories[index] = action.payload;
+        if (action.payload.data) {
+          const index = state.categories.findIndex(cat => cat._id === action.payload.data!._id);
+          if (index !== -1) {
+            state.categories[index] = action.payload.data;
+          }
         }
       })
       // Delete category

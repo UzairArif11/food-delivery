@@ -1,9 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Product } from '../types';
-import { AppDispatch } from '../store';
-import { addToCart } from '../store/cartSlice';
 import { motion } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/cartSlice';
+import type { AppDispatch } from '../store';
+import ImageWithFallback from './ImageWithFallback';
+import { getImageUrl } from '../utils/imageUtils';
 import { toast } from 'react-toastify';
 
 interface ProductCardProps {
@@ -23,12 +25,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       whileHover={{ scale: 1.03 }}
       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
     >
-      <div className="relative">
-        <img
-          src={product.image || '/assets/images/placeholder.jpg'}
-          alt={product.name}
-          className="w-full h-48 object-cover"
-        />
+        <div className="relative">
+          <ImageWithFallback
+            src={getImageUrl(product.image)}
+            alt={product.name}
+            className="w-full h-48 object-cover"
+          />
         {!product.isActive && (
           <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <span className="text-white font-semibold bg-red-600 px-3 py-1 rounded">

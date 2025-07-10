@@ -68,6 +68,7 @@ const createCategory = async (req, res) => {
     // Add image if uploaded
     if (req.file) {
       categoryData.image = `/uploads/${req.file.filename}`;
+      console.log('Image uploaded successfully:', categoryData.image);
     }
     
     const category = new Category(categoryData);
@@ -121,6 +122,7 @@ const updateCategory = async (req, res) => {
     // Update image if uploaded
     if (req.file) {
       category.image = `/uploads/${req.file.filename}`;
+      console.log('Image updated successfully:', category.image);
     }
     
     await category.save();
