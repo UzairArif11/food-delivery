@@ -5,6 +5,8 @@ import { RootState, AppDispatch } from '../store';
 import { updateQuantity, removeFromCart } from '../store/cartSlice';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ImageWithFallback from '../components/ImageWithFallback';
+import { getImageUrl } from '../utils/imageUtils';
 import { motion } from 'framer-motion';
 
 const CartPage: React.FC = () => {
@@ -57,8 +59,8 @@ const CartPage: React.FC = () => {
                     className="bg-white rounded-lg shadow-md p-6"
                   >
                     <div className="flex items-center space-x-4">
-                      <img
-                        src={item.product.image || '/assets/images/placeholder.jpg'}
+                      <ImageWithFallback
+                        src={getImageUrl(item.product.image)}
                         alt={item.product.name}
                         className="w-16 h-16 object-cover rounded"
                       />

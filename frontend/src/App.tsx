@@ -22,7 +22,7 @@ const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const AboutUsPage = lazy(() => import('./pages/AboutUsPage'));
 const ContactUsPage = lazy(() => import('./pages/ContactUsPage'));
 const FoodDetailsPage = lazy(() => import('./pages/FoodDetailsPage'));
-const OrdersPage = lazy(() => import('./pages/OrdersPage'));
+// const OrdersPage = lazy(() => import('./pages/OrdersPage'));
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const AddCategory = lazy(() => import('./pages/admin/AddCategory'));
@@ -30,6 +30,7 @@ const AddProduct = lazy(() => import('./pages/admin/AddProduct'));
 const EditCategory = lazy(() => import('./pages/admin/EditCategory'));
 const EditProduct = lazy(() => import('./pages/admin/EditProduct'));
 const ContactManagement = lazy(() => import('./pages/admin/ContactManagement'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
               <Route path="/about" element={<AboutUsPage />} />
               <Route path="/contact" element={<ContactUsPage />} />
               <Route path="/food/:id" element={<FoodDetailsPage />} />
-              <Route path="/orders" element={<OrdersPage />} />
+              {/* <Route path="/orders" element={<OrdersPage />} /> */}
               <Route path="/admin/login" element={<AdminLogin />} />
 
               <Route
@@ -101,6 +102,9 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              
+              {/* Catch-all route for 404 */}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
 

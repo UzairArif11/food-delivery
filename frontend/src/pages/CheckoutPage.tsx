@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
@@ -9,7 +10,7 @@ const CheckoutPage: React.FC = () => {
 
   const handlePlaceOrder = () => {
     // Redirect to FoodPanda's checkout page
-    window.location.href = 'https://foodpanda.page.link/jnQ94G2zQ1YiEKzn8';
+    window.location.href = 'https://www.foodpanda.pk/checkout/x4fw/payment?opening_type=delivery';
   };
 
   return (
