@@ -2,7 +2,7 @@
 
 export const debugImageURL = (imagePath: string | null | undefined) => {
   const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-  const BASE_URL = API_BASE_URL.replace('/api/v1', '');
+  const BASE_URL = API_BASE_URL.replace('/v1', '');
   
   console.log('=== Image URL Debug ===');
   console.log('Original image path:', imagePath);
