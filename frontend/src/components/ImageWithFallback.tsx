@@ -25,6 +25,7 @@ const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   }, [src]);
 
   const handleError = () => {
+    console.log(src, 'Image load error');
     if (!hasError) {
       setHasError(true);
       if (fallbackSrc) {
