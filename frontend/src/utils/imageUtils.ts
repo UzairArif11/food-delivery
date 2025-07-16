@@ -2,7 +2,7 @@
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 // Remove '/api' from the end if it exists
-const BASE_URL = API_BASE_URL.replace('/api', '');
+const BASE_URL = API_BASE_URL.replace('/api/v1', '');
 
 /**
  * Converts relative image URLs to absolute URLs

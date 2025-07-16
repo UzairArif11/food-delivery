@@ -1,4 +1,4 @@
-import { get, del, uploadFile } from './api';
+import { get, del, uploadFile, uploadFilePut } from './api';
 import { Category, ApiResponse } from '../types';
 
 // Get all categories
@@ -18,7 +18,7 @@ export const createCategory = async (categoryData: FormData): Promise<ApiRespons
 
 // Update category
 export const updateCategory = async (id: string, categoryData: FormData): Promise<ApiResponse<Category>> => {
-  return await uploadFile<ApiResponse<Category>>(`/categories/${id}`, categoryData);
+  return await uploadFilePut<ApiResponse<Category>>(`/categories/${id}`, categoryData);
 };
 
 // Delete category

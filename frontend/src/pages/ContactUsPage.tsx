@@ -366,10 +366,10 @@ const ContactUsPage: React.FC = () => {
             className="rounded-lg overflow-hidden shadow-lg"
           >
             <MapComponent
-              latitude={38.9072}
-              longitude={-77.0369}
-              address="123 Food Street, Delivery City, DC 12345"
-              restaurantName="Food Delivery Restaurant"
+              latitude={31.5598980}
+              longitude={74.3101817}
+              address="H856+M3J, Mozang Chungi, Lahore, 54000, Pakistan"
+              restaurantName="Shangrila"
               zoom={15}
               height="400px"
             />
