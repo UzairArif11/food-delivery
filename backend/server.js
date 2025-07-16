@@ -40,13 +40,13 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/food-orderi
 .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/categories', categoryRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/admin', adminRoutes);
-app.use('/api/contacts', contactRoutes);
+app.use('/v1/categories', categoryRoutes);
+app.use('/v1/products', productRoutes);
+app.use('/v1/admin', adminRoutes);
+app.use('/v1/contacts', contactRoutes);
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/v1/health', (req, res) => {
   res.json({ status: 'Server is running successfully' });
 });
 
