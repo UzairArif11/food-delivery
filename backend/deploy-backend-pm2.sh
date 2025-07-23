@@ -39,17 +39,25 @@ sudo chmod -R 775 "$BACKEND_DIR/uploads"
 # Set proper permissions for PM2 logs
 sudo chown -R www-data:www-data "/var/log/pm2"
 
+# Create PM2 home directory for www-data user
+sudo mkdir -p /home/www-data
+sudo chown -R www-data:www-data /home/www-data
+
+# Set PM2_HOME environment variable
+export PM2_HOME=/home/www-data/.pm2
+sudo -u www-data mkdir -p $PM2_HOME
+
 # Navigate to deployment directory
 cd "$BACKEND_DIR"
 
 # Stop existing PM2 process if running
 print_status "Stopping existing PM2 processes..."
-sudo -u www-data pm2 stop $APP_NAME 2>/dev/null || true
-sudo -u www-data pm2 delete $APP_NAME 2>/dev/null || true
+sudo -u www-data PM2_HOME=/home/www-data/.pm2 pm2 stop $APP_NAME 2>/dev/null || true
+sudo -u www-data PM2_HOME=/home/www-data/.pm2 pm2 delete $APP_NAME 2>/dev/null || true
 
 # Start application with PM2
 print_status "Starting application with PM2..."
-sudo -u www-data pm2 start ecosystem.config.js --env production
+sudo -u www-data PM2_HOME=/home/www-data/.pm2 pm2 start ecosystem.config.js --env production
 
 # Save PM2 configuration
 print_status "Saving PM2 configuration..."
