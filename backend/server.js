@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files (uploaded images)
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+app.use('/api/v1/uploads', express.static(path.join(__dirname, 'uploads'), {
   setHeaders: (res, path, stat) => {
     res.set('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
     res.set('Access-Control-Allow-Origin', '*');
