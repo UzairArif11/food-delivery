@@ -18,7 +18,7 @@ git pull
 
 # Install production dependencies
 print_status "Installing dependencies..."
-npm ci --only=production
+npm ci 
 
 # Build for production
 print_status "Building Next.js application..."
