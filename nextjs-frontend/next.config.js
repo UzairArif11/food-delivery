@@ -8,8 +8,8 @@ const nextConfig = {
   images: {
     // WHY: Allows images from these domains to be optimized by Next.js
     domains: ['localhost', '127.0.0.1', 'foodpanda.site', 'www.foodpanda.site'],
-    // WHY: Keep false for automatic WebP conversion and lazy loading (better SEO)
-    unoptimized: false,
+    // WHY: Disable optimization for external images to avoid 400 errors
+    unoptimized: true,
     remotePatterns: [
       {
         // WHY: Development - allows loading images from local backend
