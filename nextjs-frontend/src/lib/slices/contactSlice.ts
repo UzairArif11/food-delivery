@@ -91,12 +91,12 @@ const contactSlice = createSlice({
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.loading = false;
-        state.contacts = action.payload.contacts|| [];
+        state.contacts = (action.payload as any).contacts|| [];
         state.pagination = {
-          currentPage: action.payload.currentPage,
-          totalPages: action.payload.totalPages,
-          totalContacts: action.payload.totalContacts,
-          limit: action.payload.limit,
+          currentPage: (action.payload as any).currentPage,
+          totalPages: (action.payload as any).totalPages,
+          totalContacts: (action.payload as any).totalContacts,
+          limit: (action.payload as any).limit,
         };
       })
       .addCase(fetchContacts.rejected, (state, action) => {
@@ -111,9 +111,9 @@ const contactSlice = createSlice({
       })
       .addCase(updateContactStatus.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.contacts.findIndex(contact => contact._id === action.payload._id);
+        const index = state.contacts.findIndex(contact => contact._id === (action.payload as any)._id);
         if (index !== -1) {
-          state.contacts[index] = action.payload;
+          state.contacts[index] = (action.payload as any);
         }
       })
       .addCase(updateContactStatus.rejected, (state, action) => {
@@ -128,7 +128,7 @@ const contactSlice = createSlice({
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
-        state.contacts = state.contacts.filter(contact => contact._id !== action.payload);
+        state.contacts = state.contacts.filter(contact => contact._id !== (action.payload as any));
         state.pagination.totalContacts -= 1;
       })
       .addCase(deleteContact.rejected, (state, action) => {
