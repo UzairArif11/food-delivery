@@ -24,7 +24,17 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files (uploaded images)
+// Serve static files (uploaded images) - BOTH paths for compatibility
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  setHeaders: (res, path, stat) => {
+    res.set('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+  }
+}));
+
+// Also serve under /v1/uploads for backward compatibility
 app.use('/v1/uploads', express.static(path.join(__dirname, 'uploads'), {
   setHeaders: (res, path, stat) => {
     res.set('Cache-Control', 'public, max-age=86400'); // Cache for 1 day

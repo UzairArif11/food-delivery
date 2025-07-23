@@ -14,7 +14,10 @@ export const metadata: Metadata = {
   },
 };
 
-const MenuPageContent = dynamic(() => import('@/components/MenuPageContent'), { ssr: false });
+const MenuPageContent = dynamic(() => import('@/components/MenuPageContent'), { 
+  ssr: true,
+  loading: () => <div className="min-h-screen flex items-center justify-center">Loading...</div>
+});
 
 export default function MenuPage() {
   return (

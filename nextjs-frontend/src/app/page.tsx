@@ -15,8 +15,11 @@ export const metadata: Metadata = {
   },
 };
 
-// Dynamically import to support client-side components
-const HomePageContent = dynamic(() => import('@/components/HomePageContent'), { ssr: false });
+// Import with SSR enabled for better SEO
+const HomePageContent = dynamic(() => import('@/components/HomePageContent'), { 
+  ssr: true,
+  loading: () => <div className="min-h-screen flex items-center justify-center">Loading...</div>
+});
 
 export default function HomePage() {
   return (
