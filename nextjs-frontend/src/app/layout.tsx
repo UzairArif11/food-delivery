@@ -22,6 +22,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
     default: 'FoodDelivery - Delicious Food Delivered Fast',
     template: '%s | FoodDelivery'
@@ -57,7 +58,6 @@ export const metadata: Metadata = {
   verification: {
     google: 'google-site-verification-code',
     yandex: 'yandex-verification-code',
-    bing: 'bing-verification-code',
   },
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',

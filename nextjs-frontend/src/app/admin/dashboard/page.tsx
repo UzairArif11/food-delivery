@@ -6,14 +6,13 @@ import { Plus, Edit, Trash2, Package, Tag, MessageSquare, Eye } from 'lucide-rea
 import { RootState, AppDispatch } from '@/lib/store';
 import { 
   fetchCategories, 
-  deleteCategory, 
-  Category 
+  deleteCategory
 } from '@/lib/slices/categorySlice';
 import { 
   fetchProducts, 
-  deleteProduct, 
-  Product 
+  deleteProduct
 } from '@/lib/slices/productSlice';
+import { Category, Product } from '@/types';
 import { 
   fetchContacts, 
   updateContactStatus, 
@@ -59,7 +58,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(fetchProducts());
-    dispatch(fetchContacts());
+    dispatch(fetchContacts({}));
   }, [dispatch]);
 
   const handleDeleteCategory = async (id: string) => {
@@ -90,7 +89,7 @@ export default function AdminDashboard() {
     if (window.confirm('Are you sure you want to delete this contact?')) {
       try {
         await dispatch(deleteContact(id)).unwrap();
-        dispatch(fetchContacts());
+        dispatch(fetchContacts({}));
       } catch (error) {
         console.error('Failed to delete contact:', error);
         alert('Failed to delete contact. Please try again.');
@@ -98,7 +97,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleUpdateContactStatus = async (id: string, status: 'read' | 'unread') => {
+  const handleUpdateContactStatus = async (id: string, status: 'pending' | 'in-progress' | 'resolved') => {
     try {
       await dispatch(updateContactStatus({ id, status })).unwrap();
     } catch (error) {
@@ -376,7 +375,7 @@ export default function AdminDashboard() {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {contacts.map((contact: Contact) => (
-                      <tr key={contact._id} className={contact.status === 'unread' ? 'bg-blue-50' : ''}>
+                      <tr key={contact._id} className={contact.status === 'pending' ? 'bg-blue-50' : ''}>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {contact.name}
                         </td>
@@ -388,8 +387,10 @@ export default function AdminDashboard() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                            contact.status === 'read' 
+                            contact.status === 'resolved' 
                               ? 'bg-green-100 text-green-800' 
+                              : contact.status === 'in-progress'
+                              ? 'bg-blue-100 text-blue-800'
                               : 'bg-yellow-100 text-yellow-800'
                           }`}>
                             {contact.status}
@@ -400,9 +401,12 @@ export default function AdminDashboard() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <button
-                            onClick={() => handleUpdateContactStatus(contact._id, contact.status === 'read' ? 'unread' : 'read')}
+                            onClick={() => handleUpdateContactStatus(contact._id, 
+                              contact.status === 'pending' ? 'in-progress' : 
+                              contact.status === 'in-progress' ? 'resolved' : 'pending'
+                            )}
                             className="text-indigo-600 hover:text-indigo-900 mr-4"
-                            title={contact.status === 'read' ? 'Mark as unread' : 'Mark as read'}
+                            title="Update Status"
                           >
                             <Eye className="w-4 h-4" />
                           </button>

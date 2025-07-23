@@ -22,7 +22,7 @@ export const fetchProductsByCategory = createAsyncThunk(
 export const createProduct = createAsyncThunk(
   'products/createProduct',
   async (productData: FormData) => {
-    return await apiService.post('/products', productData);
+    return await apiService.uploadFile('/products', productData);
   }
 );
 

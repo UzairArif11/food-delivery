@@ -83,7 +83,7 @@ const EditCategoryPage: React.FC = () => {
         updateData.append('image', formData.image);
       }
 
-      await dispatch(updateCategory({ id, formData: updateData })).unwrap();
+      await dispatch(updateCategory({ id, categoryData: updateData })).unwrap();
       toast.success('Category updated successfully!');
       router.push('/admin/dashboard');
     } catch (error) {

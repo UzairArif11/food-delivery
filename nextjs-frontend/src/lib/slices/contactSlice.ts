@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import apiService from '../api';
 
 export interface Contact {
   _id: string;
@@ -48,45 +49,24 @@ export const fetchContacts = createAsyncThunk(
     if (status) queryParams.append('status', status);
     if (search) queryParams.append('search', search);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contacts?${queryParams}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch contacts');
-    }
-    return await response.json();
+    return await apiService.get(`/contacts?${queryParams}`);
+   
   }
 );
 
 export const updateContactStatus = createAsyncThunk(
   'contacts/updateStatus',
   async ({ id, status }: { id: string; status: 'pending' | 'in-progress' | 'resolved' }) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contacts/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ status }),
-    });
+   return await apiService.put(`${process.env.NEXT_PUBLIC_API_URL}/contacts/${id}`,status );
     
-    if (!response.ok) {
-      throw new Error('Failed to update contact status');
-    }
-    
-    return await response.json();
-  }
+  } 
 );
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (id: string) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contacts/${id}`, {
-      method: 'DELETE',
-    });
+  return await apiService.delete(`${process.env.NEXT_PUBLIC_API_URL}/contacts/${id}`);
     
-    if (!response.ok) {
-      throw new Error('Failed to delete contact');
-    }
-    
-    return id;
   }
 );
 
@@ -111,7 +91,7 @@ const contactSlice = createSlice({
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.loading = false;
-        state.contacts = action.payload.contacts;
+        state.contacts = action.payload.contacts|| [];
         state.pagination = {
           currentPage: action.payload.currentPage,
           totalPages: action.payload.totalPages,

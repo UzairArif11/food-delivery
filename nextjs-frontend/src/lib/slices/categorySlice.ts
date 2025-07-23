@@ -14,7 +14,7 @@ export const fetchCategories = createAsyncThunk(
 export const createCategory = createAsyncThunk(
   'categories/createCategory',
   async (categoryData: FormData) => {
-    return await apiService.post('/categories', categoryData);
+    return await apiService.uploadFile('/categories', categoryData);
   }
 );
 

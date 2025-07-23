@@ -122,13 +122,15 @@ exports.getAllContacts = async (req, res) => {
     
     res.json({
       success: true,
-      data: contacts,
+      // data: {
+        contacts,
       pagination: {
         page,
         limit,
         total,
         pages: Math.ceil(total / limit)
-      }
+      // }
+    }
     });
   } catch (error) {
     console.error('Get contacts error:', error);

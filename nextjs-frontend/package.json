@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build:prod": "NODE_ENV=production next build",
+    "start:prod": "NODE_ENV=production next start",
+    "export": "next build && next export",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
@@ -15,6 +19,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "axios": "^1.10.0",
+    "critters": "^0.0.25",
     "framer-motion": "^12.23.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.525.0",

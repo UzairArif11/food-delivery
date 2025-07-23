@@ -6,7 +6,7 @@ export const cartPersistenceMiddleware: Middleware = (store) => (next) => (actio
   const result = next(action);
   
   // Only persist cart actions on client side
-  if (typeof window !== 'undefined' && action.type.startsWith('cart/')) {
+  if (typeof window !== 'undefined' && (action as any).type?.startsWith('cart/')) {
     const state = store.getState() as RootState;
     try {
       localStorage.setItem('cart', JSON.stringify(state.cart));

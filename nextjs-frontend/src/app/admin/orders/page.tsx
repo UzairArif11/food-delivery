@@ -99,7 +99,7 @@ export default function AdminOrders() {
     try {
       setLoading(true);
       const response = await getOrders();
-      const ordersData = response.data || [];
+      const ordersData = (response as any)?.data || [];
       
       // Sort orders by creation date (newest first)
       const sortedOrders = ordersData.sort(
@@ -297,17 +297,18 @@ export default function AdminOrders() {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <Dialog open={isDetailOpen} onOpenChange={setIsDetailOpen}>
-                          <DialogTrigger asChild>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => setSelectedOrder(order)}
-                            >
-                              <Eye className="h-4 w-4 mr-1" />
-                              View
-                            </Button>
-                          </DialogTrigger>
+                        <Dialog isOpen={isDetailOpen} onClose={() => setIsDetailOpen(false)} title="Order Details">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setSelectedOrder(order);
+                              setIsDetailOpen(true);
+                            }}
+                          >
+                            <Eye className="h-4 w-4 mr-1" />
+                            View
+                          </Button>
                         </Dialog>
                         
                         <Select
@@ -338,16 +339,12 @@ export default function AdminOrders() {
 
       {/* Order Detail Dialog */}
       {selectedOrder && (
-        <Dialog open={isDetailOpen} onOpenChange={setIsDetailOpen}>
-          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>
-                Order Details - #{selectedOrder.id.slice(-8)}
-              </DialogTitle>
-              <DialogDescription>
-                View complete order information
-              </DialogDescription>
-            </DialogHeader>
+        <Dialog 
+          isOpen={isDetailOpen} 
+          onClose={() => setIsDetailOpen(false)} 
+          title={`Order Details - #${selectedOrder.id.slice(-8)}`}
+        >
+          <div className="max-w-2xl max-h-[80vh] overflow-y-auto">
             
             <div className="space-y-6">
               {/* Order Status */}
@@ -491,7 +488,7 @@ export default function AdminOrders() {
                 </CardContent>
               </Card>
             </div>
-          </DialogContent>
+          </div>
         </Dialog>
       )}
     </div>

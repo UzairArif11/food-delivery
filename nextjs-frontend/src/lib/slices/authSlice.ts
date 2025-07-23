@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { AuthState, LoginForm, Admin } from '@/types';
+import { AuthState, LoginForm, Admin, ApiResponse } from '@/types';
 import apiService from '@/lib/api';
 
 // Async thunk for admin login
@@ -68,14 +68,15 @@ const authSlice = createSlice({
       })
       .addCase(loginAdmin.fulfilled, (state, action) => {
         state.loading = false;
-        if (action.payload.success) {
-          state.admin = action.payload.data.admin;
+        const response = action.payload as ApiResponse<{ admin: Admin; token: string }>;
+        if (response && response.success) {
+          state.admin = response.data!.admin;
           state.isAuthenticated = true;
           
           // Store in localStorage on client side
           if (typeof window !== 'undefined') {
-            localStorage.setItem('admin', JSON.stringify(action.payload.data.admin));
-            localStorage.setItem('adminToken', action.payload.data.token);
+            localStorage.setItem('admin', JSON.stringify(response.data!.admin));
+            localStorage.setItem('adminToken', response.data!.token);
           }
         }
       })
