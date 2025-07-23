@@ -62,7 +62,7 @@ const categorySlice = createSlice({
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.loading = false;
-        state.categories = action.payload.data || [];
+        state.categories = (action.payload as any).data || [];  
       })
       .addCase(fetchCategories.rejected, (state, action) => {
         state.loading = false;
