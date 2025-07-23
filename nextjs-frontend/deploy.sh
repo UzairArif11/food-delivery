@@ -14,7 +14,7 @@ print_status() {
 
 # Pull latest code
 print_status "Pulling latest code..."
-git pull origin main
+git pull
 
 # Install production dependencies
 print_status "Installing dependencies..."
