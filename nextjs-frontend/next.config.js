@@ -7,7 +7,7 @@ const nextConfig = {
   // LINES 2-8: Image optimization configuration
   images: {
     // WHY: Allows images from these domains to be optimized by Next.js
-    domains: ['localhost', '127.0.0.1', 'shangrilaresturant.com', 'www.shangrilaresturant.com'],
+    domains: ['localhost', '127.0.0.1', 'foodpanda.site', 'www.foodpanda.site'],
     // WHY: Keep false for automatic WebP conversion and lazy loading (better SEO)
     unoptimized: false,
     remotePatterns: [
@@ -21,7 +21,7 @@ const nextConfig = {
       {
         // WHY: Production - allows loading images from live backend
         protocol: 'https',
-        hostname: 'shangrilaresturant.com',
+        hostname: 'foodpanda.site',
         pathname: '/api/uploads/**',
       },
     ],
@@ -35,7 +35,7 @@ const nextConfig = {
         source: '/api/:path*',
         // WHY: Uses live server in production, localhost in development
         destination: process.env.NODE_ENV === 'production' 
-          ? 'https://shangrilaresturant.com/api/:path*'
+          ? 'https://foodpanda.site/api/:path*'
           : 'http://localhost:5000/:path*',
       },
     ]

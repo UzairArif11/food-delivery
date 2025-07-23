@@ -51,7 +51,7 @@ sudo systemctl status food-delivery-frontend
 sudo systemctl status nginx
 
 # Test your website
-curl -I https://shangrilaresturant.com
+curl -I https://foodpanda.site
 ```
 
 ---

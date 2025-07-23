@@ -73,7 +73,7 @@ print_status "Reloading Nginx..."
 sudo nginx -t && sudo systemctl reload nginx
 
 print_status "🎉 Deployment completed successfully!"
-print_status "🌐 Your site should be available at: https://shangrilaresturant.com"
+print_status "🌐 Your site should be available at: https://foodpanda.site"
 
 # Show service logs
 print_status "Recent service logs:"
