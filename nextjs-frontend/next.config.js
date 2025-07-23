@@ -22,8 +22,14 @@ const nextConfig = {
         // WHY: Production - allows loading images from live backend
         protocol: 'https',
         hostname: 'foodpanda.site',
-        pathname: '/api/uploads/**',
+        pathname: '/uploads/**',
       },
+      {
+        // WHY: Production - allows loading images from live backend API
+        protocol: 'https',
+        hostname: 'foodpanda.site',
+        pathname: '/api/v1/uploads/**',
+      }
     ],
   },
   
@@ -35,7 +41,7 @@ const nextConfig = {
         source: '/api/:path*',
         // WHY: Uses live server in production, localhost in development
         destination: process.env.NODE_ENV === 'production' 
-          ? 'https://foodpanda.site/api/:path*'
+          ? 'https://foodpanda.site/api/v1/:path*'
           : 'http://localhost:5000/:path*',
       },
     ]

@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { addToCart } from '@/lib/slices/cartSlice';
 import type { AppDispatch } from '@/lib/store';
 import { Product } from '@/types';
+import { getImageUrl } from '@/utils/imageUtils';
 
 interface ProductCardProps {
   product: Product;
@@ -19,12 +20,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
 
-  const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return '/assets/images/placeholder.jpg';
-    if (imagePath.startsWith('http')) return imagePath;
-    if (imagePath.startsWith('/uploads')) return `http://localhost:5000${imagePath}`;
-    return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-  };
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card click navigation

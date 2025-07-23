@@ -7,17 +7,12 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { RootState, AppDispatch } from '@/lib/store';
 import { updateQuantity, removeFromCart } from '@/lib/slices/cartSlice';
+import { getImageUrl } from '@/utils/imageUtils';
 
 const CartPageContent: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { items, totalPrice, totalItems } = useSelector((state: RootState) => state.cart);
 
-  const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return '/assets/images/placeholder.jpg';
-    if (imagePath.startsWith('http')) return imagePath;
-    if (imagePath.startsWith('/uploads')) return `http://localhost:5000${imagePath}`;
-    return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-  };
 
   const handleQuantityChange = (productId: string, quantity: number) => {
     dispatch(updateQuantity({ productId, quantity }));

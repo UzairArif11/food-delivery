@@ -5,18 +5,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Category } from '@/types';
+import { getImageUrl } from '@/utils/imageUtils';
 
 interface CategoryCardProps {
   category: Category;
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
-  const getImageUrl = (imagePath: string) => {
-    if (!imagePath) return '/assets/images/placeholder.jpg';
-    if (imagePath.startsWith('http')) return imagePath;
-    if (imagePath.startsWith('/uploads')) return `http://localhost:5000${imagePath}`;
-    return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-  };
 
   return (
     <motion.div
