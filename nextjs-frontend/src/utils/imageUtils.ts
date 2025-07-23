@@ -8,12 +8,16 @@ export const getImageUrl = (imagePath: string, fallback = '/assets/images/placeh
   
   // If it's an uploaded image from backend
   if (imagePath.startsWith('/uploads')) {
-
-    // In production, use the site URL; in development, use localhost
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL
-
-          console.log(`${baseUrl}${imagePath}`,"`${baseUrl}${imagePath}`")
-    return `${baseUrl}${imagePath}`;
+    // In production, images are served directly from the domain root
+    // In development, use localhost backend
+    if (process.env.NODE_ENV === 'production') {
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://foodpanda.site';
+      console.log('Production Image URL:', `${siteUrl}${imagePath}`);
+      return `${siteUrl}${imagePath}`;
+    } else {
+      console.log('Development Image URL:', `http://localhost:5000${imagePath}`);
+      return `http://localhost:5000${imagePath}`;
+    }
   }
   
   // If it's a public asset
