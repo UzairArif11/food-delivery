@@ -70,16 +70,16 @@ const categorySlice = createSlice({
       })
       // Create category
       .addCase(createCategory.fulfilled, (state, action) => {
-        if (action.payload.data) {
-          state.categories.push(action.payload.data);
+        if ((action.payload as any).data) {
+          state.categories.push((action.payload as any).data);
         }
       })
       // Update category
       .addCase(updateCategory.fulfilled, (state, action) => {
-        if (action.payload.data) {
-          const index = state.categories.findIndex(cat => cat._id === action.payload.data!._id);
+        if ((action.payload as any).data) {
+          const index = state.categories.findIndex(cat => cat._id === (action.payload as any).data!._id);
           if (index !== -1) {
-            state.categories[index] = action.payload.data;
+            state.categories[index] = (action.payload as any).data;
           }
         }
       })

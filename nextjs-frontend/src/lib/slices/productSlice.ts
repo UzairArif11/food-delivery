@@ -105,7 +105,7 @@ const productSlice = createSlice({
       })
       .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
         state.loading = false;
-        state.filteredProducts = action.payload.data || [];
+        state.filteredProducts = (action.payload as any).data || [];
       })
       .addCase(fetchProductsByCategory.rejected, (state, action) => {
         state.loading = false;
@@ -113,17 +113,17 @@ const productSlice = createSlice({
       })
       // Create product
       .addCase(createProduct.fulfilled, (state, action) => {
-        if (action.payload.data) {
-          state.products.push(action.payload.data);
-          state.filteredProducts.push(action.payload.data);
+        if ((action.payload as any).data) {
+          state.products.push((action.payload as any).data);
+          state.filteredProducts.push((action.payload as any).data);
         }
       })
       // Update product
       .addCase(updateProduct.fulfilled, (state, action) => {
-        if (action.payload.data) {
-          const index = state.products.findIndex(prod => prod._id === action.payload.data!._id);
+        if ((action.payload as any).data) {
+          const index = state.products.findIndex(prod => prod._id === (action.payload as any).data!._id);
           if (index !== -1) {
-            state.products[index] = action.payload.data;
+            state.products[index] = (action.payload as any).data;
             state.filteredProducts = state.products;
           }
         }
