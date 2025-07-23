@@ -27,9 +27,10 @@ NODE_ENV=production npm run build
 # Deploy files
 print_status "Deploying to production..."
 sudo mkdir -p "$BUILD_DIR"
-sudo cp -r .next/standalone/* "$BUILD_DIR/"
-sudo cp -r .next/static "$BUILD_DIR/.next/"
+sudo cp -r .next "$BUILD_DIR/"
 sudo cp -r public "$BUILD_DIR/"
+sudo cp -r node_modules "$BUILD_DIR/"
+sudo cp package.json "$BUILD_DIR/"
 sudo chown -R www-data:www-data "$BUILD_DIR"
 
 # Create or update systemd service
@@ -43,7 +44,7 @@ After=network.target
 Type=simple
 User=www-data
 WorkingDirectory=$BUILD_DIR
-ExecStart=/usr/bin/node server.js
+ExecStart=/usr/bin/npm start
 Restart=on-failure
 RestartSec=10
 Environment=NODE_ENV=production
@@ -63,7 +64,7 @@ sudo systemctl restart food-delivery-frontend
 if sudo systemctl is-active --quiet food-delivery-frontend; then
     print_status "Frontend service is running successfully!"
 else
-    print_error "Frontend service failed to start!"
+    echo "❌ Frontend service failed to start!"
     sudo systemctl status food-delivery-frontend
     exit 1
 fi
@@ -78,3 +79,23 @@ print_status "🌐 Your site should be available at: https://foodpanda.site"
 # Show service logs
 print_status "Recent service logs:"
 sudo journalctl -u food-delivery-frontend --no-pager -n 10
+
+
+# Reload nginx
+print_status "Reloading Nginx..."
+sudo nginx -t && sudo systemctl reload nginx
+
+print_status "🎉 Deployment completed successfully!"
+print_status "🌐 Your site should be available at: https://foodpanda.site"
+
+# Show systemd service status
+print_status "🔍 Checking systemd service status..."
+sudo systemctl status food-delivery-frontend --no-pager
+
+# Show recent logs
+print_status "Recent service logs:"
+sudo journalctl -u food-delivery-frontend --no-pager -n 10
+
+# Test domain with curl
+print_status "🌐 Testing live site with curl..."
+curl -I https://foodpanda.site
