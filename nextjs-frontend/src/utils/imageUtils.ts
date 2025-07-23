@@ -10,9 +10,8 @@ export const getImageUrl = (imagePath: string, fallback = '/assets/images/placeh
   if (imagePath.startsWith('/uploads')) {
 
     // In production, use the site URL; in development, use localhost
-    const baseUrl = process.env.NODE_ENV === 'production' 
-      ? process.env.NEXT_PUBLIC_API_URL || 'https://foodpanda.site'
-      : 'http://localhost:5000';
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
+
           console.log(`${baseUrl}${imagePath}`,"`${baseUrl}${imagePath}`")
     return `${baseUrl}${imagePath}`;
   }
