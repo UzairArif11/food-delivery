@@ -36,7 +36,6 @@ module.exports = {
     
     // Environment specific settings
     cwd: '/var/www/food-backend',
-    user: 'www-data',
     
     // Startup script
     post_update: ['npm install', 'echo "Backend updated successfully"'],
