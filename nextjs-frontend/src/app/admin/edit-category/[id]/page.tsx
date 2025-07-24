@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,8 +35,6 @@ export async function generateStaticParams() {
   // This allows the build to continue without pre-generating these pages
   return [];
 }
-
-'use client';
 
 const EditCategoryPage: React.FC = () => {
   const params = useParams();

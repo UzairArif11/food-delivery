@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
@@ -26,8 +28,6 @@ export async function generateStaticParams() {
   // This allows the build to continue without pre-generating these pages
   return [];
 }
-
-'use client';
 
 const EditProductPage: React.FC = () => {
   const params = useParams();
