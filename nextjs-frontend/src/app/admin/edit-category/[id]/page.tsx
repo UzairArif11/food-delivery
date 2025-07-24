@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +7,34 @@ import { fetchCategories, updateCategory } from '@/lib/slices/categorySlice';
 import { Button } from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
+// Generate static params for all category IDs
+export async function generateStaticParams() {
+  try {
+    // For static generation, we'll provide some common category IDs
+    // In a real implementation, you might fetch from your API
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories`, {
+      cache: 'no-store'
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      const categories = data.data || [];
+      
+      return categories.map((category: any) => ({
+        id: category._id.toString(),
+      }));
+    }
+  } catch (error) {
+    console.log('Error fetching categories for static generation:', error);
+  }
+  
+  // Fallback: return empty array if API call fails
+  // This allows the build to continue without pre-generating these pages
+  return [];
+}
+
+'use client';
 
 const EditCategoryPage: React.FC = () => {
   const params = useParams();
