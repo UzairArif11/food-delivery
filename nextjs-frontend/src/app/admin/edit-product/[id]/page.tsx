@@ -1,13 +1,10 @@
-import EditProductClient from './EditProductClient';
-
 // Generate static params for all product IDs
-export async function generateStaticParams(): Promise<{ id: string }[]> {
+export async function generateStaticParams() {
   console.log('🔄 Generating static params for edit-product pages...');
-  
-  // Always return an empty array to allow build to succeed
-  // Dynamic pages will be generated on-demand
   return [];
 }
+
+import EditProductClient from './EditProductClient';
 
 interface PageProps {
   params: {

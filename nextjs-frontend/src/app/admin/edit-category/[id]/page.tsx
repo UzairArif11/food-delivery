@@ -1,13 +1,10 @@
-import EditCategoryClient from './EditCategoryClient';
-
 // Generate static params for all category IDs
-export async function generateStaticParams(): Promise<{ id: string }[]> {
+export async function generateStaticParams() {
   console.log('🔄 Generating static params for edit-category pages...');
-  
-  // Always return an empty array to allow build to succeed
-  // Dynamic pages will be generated on-demand
   return [];
 }
+
+import EditCategoryClient from './EditCategoryClient';
 
 interface PageProps {
   params: {

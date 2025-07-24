@@ -49,26 +49,8 @@ const nextConfig = {
   // WHY: Enables automatic Gzip compression
   compress: true,
   
-  // LINES 21-35: Additional security headers for SEO
-  async headers() {
-    return [
-      {
-        source: '/(.*)', // Apply to all routes
-        headers: [
-          {
-            // WHY: Improves DNS resolution speed
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on'
-          },
-          {
-            // WHY: Prevents MIME type sniffing attacks
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-        ],
-      },
-    ]
-  },
+  // NOTE: headers() function is removed because it's not compatible with output: 'export'
+  // Security headers should be configured at the web server level (nginx/apache)
   
   // LINES 36-38: Bundle size optimization
   experimental: {
