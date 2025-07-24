@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MessageSquare, Trash2, Edit, Plus, Package, Tag } from 'lucide-react';
+import { MessageSquare, Trash2, Edit, Plus, Package, Tag, Eye } from 'lucide-react';
 import { buildImageUrl } from '@/utils/apiUrl';
 import { logger } from '@/utils/logger';
 import { RootState, AppDispatch } from '@/lib/store';
