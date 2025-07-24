@@ -9,6 +9,8 @@ import { fetchCategories, updateCategory } from '@/lib/slices/categorySlice';
 import { Button } from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { buildImageUrl } from '@/utils/apiUrl';
+import { logger } from '@/utils/logger';
 
 interface EditCategoryClientProps {
   id: string;
@@ -44,7 +46,7 @@ const EditCategoryClient: React.FC<EditCategoryClientProps> = ({ id }) => {
         image: null
       });
       if (category.image) {
-        setPreviewImage(`http://localhost:5000/${category.image.replace(/^\/*/,'')}`);
+        setPreviewImage(buildImageUrl(category.image));
       }
     }
   }, [category]);
@@ -81,7 +83,7 @@ const EditCategoryClient: React.FC<EditCategoryClientProps> = ({ id }) => {
       updateData.append('name', formData.name);
       updateData.append('description', formData.description);
       if (formData.image) {
-        console.log('Uploading image:', formData.image);
+        logger.info('Uploading category image', { fileName: formData.image.name, size: formData.image.size }, 'EditCategoryClient');
         updateData.append('image', formData.image);
       }
 
@@ -89,7 +91,7 @@ const EditCategoryClient: React.FC<EditCategoryClientProps> = ({ id }) => {
       toast.success('Category updated successfully!');
       router.push('/admin/dashboard');
     } catch (error) {
-      console.error('Error updating category:', error);
+      logger.error('Failed to update category', error, 'EditCategoryClient');
       toast.error('Failed to update category');
     } finally {
       setSubmitting(false);

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { RootState, AppDispatch } from '@/lib/store';
+import { logger } from '@/utils/logger';
 import { loginAdmin } from '@/lib/slices/authSlice';
 import { motion } from 'framer-motion';
 
@@ -38,7 +39,7 @@ const AdminLoginContent: React.FC = () => {
       await dispatch(loginAdmin(formData)).unwrap();
       router.push('/admin/dashboard');
     } catch (error) {
-      console.error('Login failed:', error);
+      logger.error('Admin login failed', error, 'AdminLoginContent');
     }
   };
 

@@ -4,9 +4,9 @@ import '@/styles/global.css';
 import '@/styles/admin.css';
 import '@/styles/login.css';
 import { ReduxProvider } from '@/components/providers/ReduxProvider';
-import { ToastContainer } from 'react-toastify';
 import StructuredData from '@/components/StructuredData';
-import 'react-toastify/dist/ReactToastify.css';
+import { Toaster } from 'sonner';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -92,23 +92,19 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <StructuredData />
-        <ReduxProvider>
-          <div className="min-h-screen bg-gray-50">
-            {children}
-          </div>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-        </ReduxProvider>
+        <ErrorBoundary>
+          <ReduxProvider>
+            <div className="min-h-screen bg-gray-50">
+              {children}
+            </div>
+            <Toaster
+              position="top-right"
+              richColors
+              closeButton
+              duration={5000}
+            />
+          </ReduxProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

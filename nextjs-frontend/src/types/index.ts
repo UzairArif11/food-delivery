@@ -138,8 +138,9 @@ export interface ContactState extends LoadingState {
   selectedContact: ContactForm | null;
 }
 
-// Constants
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+// Constants - Import from centralized utility
+import { getApiBaseUrl } from '@/utils/apiUrl';
+export const API_BASE_URL = getApiBaseUrl();
 export const FOODPANDA_CHECKOUT_URL = 'https://www.foodpanda.com/checkout';  // External checkout URL
 
 // SEO Meta Data Interface for Next.js

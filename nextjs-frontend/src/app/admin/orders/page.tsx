@@ -45,6 +45,7 @@ import {
 } from 'lucide-react';
 import { getOrders, updateOrderStatus } from '@/lib/api';
 import { formatCurrency } from '@/lib/utils';
+import { logger } from '@/utils/logger';
 import { toast } from 'sonner';
 
 interface Order {
@@ -108,7 +109,7 @@ export default function AdminOrders() {
       
       setOrders(sortedOrders);
     } catch (error) {
-      console.error('Failed to fetch orders:', error);
+      logger.error('Failed to fetch orders', error, 'AdminOrders');
       toast.error('Failed to fetch orders');
     } finally {
       setLoading(false);
@@ -154,7 +155,7 @@ export default function AdminOrders() {
       
       toast.success('Order status updated successfully');
     } catch (error) {
-      console.error('Failed to update order status:', error);
+      logger.error('Failed to update order status', error, 'AdminOrders');
       toast.error('Failed to update order status');
     }
   };

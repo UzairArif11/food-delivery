@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState, LoginForm, Admin, ApiResponse } from '@/types';
 import apiService from '@/lib/api';
+import { logger } from '@/utils/logger';
 
 // Async thunk for admin login
 export const loginAdmin = createAsyncThunk(
@@ -24,7 +25,7 @@ const loadAuthFromStorage = (): { admin: Admin | null; isAuthenticated: boolean 
         };
       }
     } catch (error) {
-      console.error('Error loading auth from localStorage:', error);
+      logger.error('Failed to load auth from localStorage', error, 'AuthSlice');
     }
   }
   return {

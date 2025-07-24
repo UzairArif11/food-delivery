@@ -1,4 +1,5 @@
 // Image utility functions for Next.js
+import { logger } from '@/utils/logger';
 
 export const getImageUrl = (imagePath: string, fallback = '/assets/images/placeholder.jpg'): string => {
   if (!imagePath) return fallback;
@@ -12,11 +13,12 @@ export const getImageUrl = (imagePath: string, fallback = '/assets/images/placeh
     // In development, use localhost backend
     if (process.env.NODE_ENV === 'production') {
       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://foodpanda.site';
-      console.log('Production Image URL:', `${siteUrl}${imagePath}`);
+      logger.debug('Production image URL generated', { siteUrl, imagePath }, 'ImageUtils');
       return `${siteUrl}${imagePath}`;
     } else {
-      console.log('Development Image URL:', `http://localhost:5000${imagePath}`);
-      return `http://localhost:5000${imagePath}`;
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/v1', '') || 'http://localhost:5000';
+      logger.debug('Development image URL generated', { apiUrl, imagePath }, 'ImageUtils');
+      return `${apiUrl}${imagePath}`;
     }
   }
   

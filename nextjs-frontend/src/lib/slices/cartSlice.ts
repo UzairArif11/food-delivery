@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { logger } from '@/utils/logger';
 import { CartState, Product } from '@/types';
 
 // Load cart from localStorage
@@ -11,7 +12,7 @@ const loadCartFromStorage = (): CartState => {
         return JSON.parse(cartData);
       }
     } catch (error) {
-      console.error('Error loading cart from localStorage:', error);
+      logger.error('Failed to load cart from localStorage', error, 'CartSlice');
     }
   }
   return {

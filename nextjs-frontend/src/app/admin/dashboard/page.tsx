@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Plus, Edit, Trash2, Package, Tag, MessageSquare, Eye } from 'lucide-react';
+import { MessageSquare, Trash2, Edit, Plus, Package, Tag } from 'lucide-react';
+import { buildImageUrl } from '@/utils/apiUrl';
+import { logger } from '@/utils/logger';
 import { RootState, AppDispatch } from '@/lib/store';
 import { 
   fetchCategories, 
@@ -67,7 +69,7 @@ export default function AdminDashboard() {
         await dispatch(deleteCategory(id)).unwrap();
         dispatch(fetchCategories());
       } catch (error) {
-        console.error('Failed to delete category:', error);
+        logger.error('Failed to delete category', error, 'AdminDashboard');
         alert('Failed to delete category. Please try again.');
       }
     }
@@ -79,7 +81,7 @@ export default function AdminDashboard() {
         await dispatch(deleteProduct(id)).unwrap();
         dispatch(fetchProducts());
       } catch (error) {
-        console.error('Failed to delete product:', error);
+        logger.error('Failed to delete product', error, 'AdminDashboard');
         alert('Failed to delete product. Please try again.');
       }
     }
@@ -91,7 +93,7 @@ export default function AdminDashboard() {
         await dispatch(deleteContact(id)).unwrap();
         dispatch(fetchContacts({}));
       } catch (error) {
-        console.error('Failed to delete contact:', error);
+        logger.error('Failed to delete contact', error, 'AdminDashboard');
         alert('Failed to delete contact. Please try again.');
       }
     }
@@ -101,7 +103,7 @@ export default function AdminDashboard() {
     try {
       await dispatch(updateContactStatus({ id, status })).unwrap();
     } catch (error) {
-      console.error('Failed to update contact status:', error);
+      logger.error('Failed to update contact status', error, 'AdminDashboard');
     }
   };
 
@@ -210,7 +212,7 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           {category.image ? (
                             <img
-                              src={`http://localhost:5000/${category.image?.replace(/^\/+/, '')}`}
+                              src={buildImageUrl(category.image)}
                               alt={category.name}
                               className="h-10 w-10 rounded-full object-cover"
                             />
@@ -301,7 +303,7 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           {product.image ? (
                             <img
-                              src={`http://localhost:5000/${product.image?.replace(/^\/+/, '')}`}
+                              src={buildImageUrl(product.image)}
                               alt={product.name}
                               className="h-10 w-10 rounded object-cover"
                             />
