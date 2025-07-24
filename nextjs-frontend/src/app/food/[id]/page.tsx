@@ -1,52 +1,36 @@
-'use client';
+import FoodDetailsClient from './FoodDetailsClient';
 
-import React from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-
-const FoodDetailsPage: React.FC = () => {
-  const params = useParams();
-  const router = useRouter();
-  const id = params?.id as string;
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+// Generate static params for all food/product IDs
+export async function generateStaticParams() {
+  try {
+    // For static generation, we'll fetch all products/food items
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/products`, {
+      cache: 'no-store'
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      const products = data.data || [];
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-sm border p-8">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            Food Details
-          </h1>
-          <p className="text-gray-600 mb-4">
-            Food details for ID: {id}
-          </p>
-          <p className="text-sm text-gray-500 mb-6">
-            This page needs to be implemented with full food detail functionality
-            including images, description, pricing, and add to cart feature.
-          </p>
-          
-          <div className="space-x-4">
-            <button
-              onClick={() => router.back()}
-              className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
-            >
-              Go Back
-            </button>
-            <button
-              onClick={() => router.push('/menu')}
-              className="bg-primary-600 text-white py-2 px-4 rounded-md hover:bg-primary-700 transition-colors"
-            >
-              Browse Menu
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <Footer />
-    </div>
-  );
-};
+      return products.map((product: any) => ({
+        id: product._id.toString(),
+      }));
+    }
+  } catch (error) {
+    console.log('Error fetching products for static generation:', error);
+  }
+  
+  // Fallback: return empty array if API call fails
+  // This allows the build to continue without pre-generating these pages
+  return [];
+}
 
-export default FoodDetailsPage;
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function FoodDetailsPage({ params }: PageProps) {
+  return <FoodDetailsClient id={params.id} />;
+}
