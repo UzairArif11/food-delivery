@@ -224,7 +224,7 @@ export default function AdminDashboard() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <button
-                            onClick={() => router.push(`/admin/edit-category/${category._id}`)}
+                            onClick={() => router.push(`/admin/edit-category?id=${category._id}`)}
                             className="text-indigo-600 hover:text-indigo-900 mr-4"
                           >
                             <Edit className="w-4 h-4" />
@@ -315,7 +315,7 @@ export default function AdminDashboard() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <button
-                            onClick={() => router.push(`/admin/edit-product/${product._id}`)}
+                            onClick={() => router.push(`/admin/edit-product?id=${product._id}`)}
                             className="text-indigo-600 hover:text-indigo-900 mr-4"
                           >
                             <Edit className="w-4 h-4" />

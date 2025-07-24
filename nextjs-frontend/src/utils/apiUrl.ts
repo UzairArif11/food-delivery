@@ -36,6 +36,8 @@ export const buildImageUrl = (imagePath: string | undefined | null): string => {
   // Remove leading slashes to normalize
   const cleanPath = imagePath.replace(/^\/+/, '');
   
-  // Build the full URL
-  return `${getApiBaseUrl()}/${cleanPath}`;
+  // For images, we need the site URL (not API URL)
+  // Images are served directly from the site root, not through /api/
+  const siteUrl = getSiteUrl();
+  return `${siteUrl}/${cleanPath}`;
 };
