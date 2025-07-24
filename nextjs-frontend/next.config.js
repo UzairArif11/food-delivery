@@ -75,6 +75,18 @@ const nextConfig = {
     // WHY: Tree-shakes unused code from these heavy libraries
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
+  
+  // Exclude admin routes from static export
+  async exportPathMap(defaultPathMap) {
+    const pathMap = { ...defaultPathMap };
+    // Remove admin routes since they require dynamic behavior
+    Object.keys(pathMap).forEach(path => {
+      if (path.startsWith('/admin')) {
+        delete pathMap[path];
+      }
+    });
+    return pathMap;
+  },
 }
 
 module.exports = nextConfig
