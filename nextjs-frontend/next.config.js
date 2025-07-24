@@ -1,15 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // LINE 1: Creates standalone server for production deployment
-  // WHY: Allows running Next.js without node_modules, reduces server size
-  output: 'standalone',
+  // CRITICAL: Change from standalone to export for SSG
+  output: 'export',
   
   // LINES 2-8: Image optimization configuration
   images: {
+    // WHY: Disable image optimization for static export
+    unoptimized: true,
     // WHY: Allows images from these domains to be optimized by Next.js
     domains: ['localhost', '127.0.0.1', 'foodpanda.site', 'www.foodpanda.site'],
-    // WHY: Disable optimization for external images to avoid 400 errors
-    unoptimized: true,
     remotePatterns: [
       {
         // WHY: Development - allows loading images from local backend
@@ -33,18 +32,13 @@ const nextConfig = {
     ],
   },
   
-  // LINES 9-17: API routing for seamless backend communication
-  async rewrites() {
-    return [
-      {
-        // WHY: Routes /api/* calls to backend automatically
-        source: '/api/:path*',
-        // WHY: Uses live server in production, localhost in development
-        destination: process.env.NODE_ENV === 'production' 
-          ? 'https://foodpanda.site/api/v1/:path*'
-          : 'http://localhost:5000/:path*',
-      },
-    ]
+  // Disable server features for static export
+  trailingSlash: true,
+  
+  // Environment variables for build time
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   },
   
   // LINES 18-20: Performance and security optimizations

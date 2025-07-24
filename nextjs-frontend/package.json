@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "build:prod": "NODE_ENV=production next build",
-    "start:prod": "NODE_ENV=production next start",
-    "export": "next build && next export",
+    "build:ssg": "NODE_ENV=production next build",
+    "export": "next export",
+    "deploy:ssg": "npm run build:ssg && chmod +x deploy-ssg.sh && ./deploy-ssg.sh",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
