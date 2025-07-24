@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { addToCart } from '@/lib/slices/cartSlice';
 import type { AppDispatch } from '@/lib/store';
 import { Product } from '@/types';

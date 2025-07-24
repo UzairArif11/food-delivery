@@ -7,7 +7,7 @@ import { RootState, AppDispatch } from '@/lib/store';
 import { createProduct } from '@/lib/slices/productSlice';
 import { fetchCategories } from '@/lib/slices/categorySlice';
 import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 interface ProductFormData {
   name: string;

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { createCategory } from '@/lib/slices/categorySlice';
 import { RootState, AppDispatch } from '@/lib/store';
 import { motion } from 'framer-motion';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 interface CategoryFormData {
   name: string;

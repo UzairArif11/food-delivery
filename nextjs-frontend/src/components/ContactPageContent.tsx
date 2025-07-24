@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import dynamic from 'next/dynamic';
 
 // Dynamically import MapComponent to avoid SSR issues
