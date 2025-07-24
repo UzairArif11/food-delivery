@@ -1,9 +1,3 @@
-// Generate static params for all category IDs
-export async function generateStaticParams() {
-  console.log('🔄 Generating static params for edit-category pages...');
-  return [];
-}
-
 import EditCategoryClient from './EditCategoryClient';
 
 interface PageProps {

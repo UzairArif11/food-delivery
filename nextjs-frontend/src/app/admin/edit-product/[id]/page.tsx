@@ -1,9 +1,3 @@
-// Generate static params for all product IDs
-export async function generateStaticParams() {
-  console.log('🔄 Generating static params for edit-product pages...');
-  return [];
-}
-
 import EditProductClient from './EditProductClient';
 
 interface PageProps {
