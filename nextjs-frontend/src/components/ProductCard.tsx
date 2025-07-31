@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { addToCart } from '@/lib/slices/cartSlice';
 import type { AppDispatch } from '@/lib/store';
 import { Product } from '@/types';
-import { getImageUrl, createPlaceholderImage } from '@/utils/imageUtils';
+import { getImageUrl, getImageUrlWithFallbacks, createPlaceholderImage } from '@/utils/imageUtils';
 import { logger } from '@/utils/logger';
 
 interface ProductCardProps {
@@ -21,7 +21,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const [imageError, setImageError] = React.useState(false);
-  const [imageSrc, setImageSrc] = React.useState<string>(getImageUrl(image));
+  const [currentUrlIndex, setCurrentUrlIndex] = React.useState(0);
+  const [imageSrc, setImageSrc] = React.useState<string>('');
+  
+  // Get all possible image URLs
+  const imageUrls = React.useMemo(() => {
+    if (image) {
+      const fallbacks = getImageUrlWithFallbacks(image);
+      logger.debug('Generated image fallback URLs', { image, fallbacks, productName: name }, 'ProductCard');
+      return fallbacks;
+    }
+    return ['/assets/images/placeholder.jpg'];
+  }, [image, name]);
+  
+  // Set initial image source
+  React.useEffect(() => {
+    if (imageUrls.length > 0) {
+      setImageSrc(imageUrls[0]);
+      setCurrentUrlIndex(0);
+      setImageError(false);
+    }
+  }, [imageUrls]);
 
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -35,26 +55,36 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
   
   const handleImageError = () => {
-    logger.warn('Image failed to load', { 
+    const nextIndex = currentUrlIndex + 1;
+    
+    logger.warn('Image failed to load, trying next fallback', { 
       productName: name, 
       originalImage: image, 
-      attemptedUrl: imageSrc 
+      failedUrl: imageSrc,
+      currentIndex: currentUrlIndex,
+      nextIndex: nextIndex,
+      totalUrls: imageUrls.length
     }, 'ProductCard');
     
-    setImageError(true);
-    // Try alternative paths in sequence
-    if (!imageError) {
-      const alternatives = [
-        `/api${image}`, // Try /api/uploads/
-        `/v1${image}`,  // Try /v1/uploads/
-        '/assets/images/placeholder.jpg' // Final fallback
-      ];
+    if (nextIndex < imageUrls.length) {
+      // Try next URL in the fallback chain
+      setCurrentUrlIndex(nextIndex);
+      setImageSrc(imageUrls[nextIndex]);
+      setImageError(false);
       
-      const nextUrl = alternatives[0];
-      if (nextUrl !== imageSrc) {
-        setImageSrc(nextUrl);
-        setImageError(false);
-      }
+      logger.debug('Switching to fallback URL', {
+        productName: name,
+        newUrl: imageUrls[nextIndex],
+        urlIndex: nextIndex
+      }, 'ProductCard');
+    } else {
+      // All URLs failed, show error state
+      setImageError(true);
+      logger.error('All image URLs failed for product', {
+        productName: name,
+        originalImage: image,
+        attemptedUrls: imageUrls
+      }, 'ProductCard');
     }
   };
   

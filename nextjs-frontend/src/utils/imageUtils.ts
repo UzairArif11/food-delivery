@@ -17,16 +17,26 @@ export const getImageUrl = (imagePath: string, fallback = '/assets/images/placeh
   if (imagePath.startsWith('/uploads')) {
     let imageUrl: string;
     
-    // In production, images are served directly from the domain root via NGINX proxy
-    if (process.env.NODE_ENV === 'production') {
-      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://foodpanda.site';
+    // Detect environment more reliably
+    const isProduction = process.env.NODE_ENV === 'production' || 
+                        typeof window !== 'undefined' && window.location.hostname !== 'localhost';
+    
+    if (isProduction) {
+      // In production, try multiple URL patterns based on NGINX configuration
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                     (typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.hostname}` : 'https://foodpanda.site');
+      
+      // The NGINX configuration serves images at /uploads/ path
       imageUrl = `${siteUrl}${imagePath}`;
-      logger.debug('Production image URL generated', { siteUrl, imagePath, imageUrl }, 'ImageUtils');
+      logger.debug('Production image URL generated', { siteUrl, imagePath, imageUrl, isProduction }, 'ImageUtils');
     } else {
-      // In development, use localhost backend with multiple fallback paths
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/v1', '') || 'http://localhost:5000';
-      imageUrl = `${apiUrl}${imagePath}`;
-      logger.debug('Development image URL generated', { apiUrl, imagePath, imageUrl }, 'ImageUtils');
+      // In development, use localhost backend
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 
+                        process.env.NEXT_PUBLIC_API_URL?.replace('/v1', '') || 
+                        'http://localhost:5000';
+      
+      imageUrl = `${backendUrl}${imagePath}`;
+      logger.debug('Development image URL generated', { backendUrl, imagePath, imageUrl, isProduction }, 'ImageUtils');
     }
     
     return imageUrl;
@@ -36,6 +46,35 @@ export const getImageUrl = (imagePath: string, fallback = '/assets/images/placeh
   const publicUrl = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
   logger.debug('Public asset URL generated', { imagePath, publicUrl }, 'ImageUtils');
   return publicUrl;
+};
+
+// Alternative image URL generator with multiple fallback attempts
+export const getImageUrlWithFallbacks = (imagePath: string): string[] => {
+  if (!imagePath || !imagePath.startsWith('/uploads')) {
+    return ['/assets/images/placeholder.jpg'];
+  }
+  
+  const isProduction = process.env.NODE_ENV === 'production' || 
+                      typeof window !== 'undefined' && window.location.hostname !== 'localhost';
+  
+  if (isProduction) {
+    const baseUrl = typeof window !== 'undefined' ? 
+      `${window.location.protocol}//${window.location.hostname}` : 
+      'https://foodpanda.site';
+    
+    return [
+      `${baseUrl}${imagePath}`,                    // Direct NGINX proxy
+      `${baseUrl}/api/v1${imagePath}`,             // API route proxy
+      '/assets/images/placeholder.jpg'              // Final fallback
+    ];
+  } else {
+    return [
+      `http://localhost:5000${imagePath}`,          // Direct backend
+      `http://localhost:5000/v1${imagePath}`,       // V1 route
+      `http://localhost:5000/api${imagePath}`,      // API route
+      '/assets/images/placeholder.jpg'              // Final fallback
+    ];
+  }
 };
 
 export const createPlaceholderImage = (width: number, height: number, text = 'Image'): string => {
