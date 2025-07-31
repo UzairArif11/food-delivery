@@ -2,28 +2,40 @@
 import { logger } from '@/utils/logger';
 
 export const getImageUrl = (imagePath: string, fallback = '/assets/images/placeholder.jpg'): string => {
-  if (!imagePath) return fallback;
+  if (!imagePath) {
+    logger.debug('No image path provided, using fallback', { fallback }, 'ImageUtils');
+    return fallback;
+  }
   
   // If it's already a full URL, return as is
-  if (imagePath.startsWith('http')) return imagePath;
+  if (imagePath.startsWith('http')) {
+    logger.debug('Full URL provided', { imagePath }, 'ImageUtils');
+    return imagePath;
+  }
   
   // If it's an uploaded image from backend
   if (imagePath.startsWith('/uploads')) {
-    // In production, images are served directly from the domain root
-    // In development, use localhost backend
+    let imageUrl: string;
+    
+    // In production, images are served directly from the domain root via NGINX proxy
     if (process.env.NODE_ENV === 'production') {
       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://foodpanda.site';
-      logger.debug('Production image URL generated', { siteUrl, imagePath }, 'ImageUtils');
-      return `${siteUrl}${imagePath}`;
+      imageUrl = `${siteUrl}${imagePath}`;
+      logger.debug('Production image URL generated', { siteUrl, imagePath, imageUrl }, 'ImageUtils');
     } else {
+      // In development, use localhost backend with multiple fallback paths
       const apiUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/v1', '') || 'http://localhost:5000';
-      logger.debug('Development image URL generated', { apiUrl, imagePath }, 'ImageUtils');
-      return `${apiUrl}${imagePath}`;
+      imageUrl = `${apiUrl}${imagePath}`;
+      logger.debug('Development image URL generated', { apiUrl, imagePath, imageUrl }, 'ImageUtils');
     }
+    
+    return imageUrl;
   }
   
   // If it's a public asset
-  return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+  const publicUrl = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+  logger.debug('Public asset URL generated', { imagePath, publicUrl }, 'ImageUtils');
+  return publicUrl;
 };
 
 export const createPlaceholderImage = (width: number, height: number, text = 'Image'): string => {
