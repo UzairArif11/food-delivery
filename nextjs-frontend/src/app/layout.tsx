@@ -24,35 +24,50 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
-    default: 'FoodDelivery - Delicious Food Delivered Fast',
-    template: '%s | FoodDelivery'
+    default: 'Shangrila Restaurant - Elevating Desi Cuisine Since 1989',
+    template: '%s | Shangrila Restaurant'
   },
-  description: 'Order your favorite dishes from our restaurant and get them delivered right to your doorstep in no time. Fresh ingredients, carefully prepared dishes, and fast delivery.',
-  keywords: 'food delivery, restaurant, online ordering, fast food, fresh ingredients, home delivery',
-  authors: [{ name: 'FoodDelivery Team' }],
-  creator: 'FoodDelivery',
-  publisher: 'FoodDelivery',
+  applicationName: 'Shangrila Restaurant',
+  description: 'Since 1989, Shangrila has been Lahore\'s go-to destination for rich, authentic Pakistani cuisine. From legendary Fari Daal to traditional desi flavors, every plate celebrates our culinary heritage.',
+  keywords: 'shangrila restaurant lahore, pakistani food, desi cuisine, fari daal, authentic pakistani restaurant, food delivery lahore, traditional pakistani dishes, kalagi, mutton joint, shahi daal',
+  authors: [{ name: 'Shangrila Restaurant Team' }],
+  creator: 'shangrilaresturant',
+  publisher: 'shangrilaresturant',
   robots: 'index,follow',
+  icons: {
+    icon: [
+      { url: '/custom-icon.png', type: 'image/png' },
+      { url: '/custom-icon.png', sizes: '16x16', type: 'image/png' },
+      { url: '/custom-icon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/custom-icon.png', sizes: '192x192', type: 'image/png' }
+    ],
+    apple: [
+      { url: '/custom-icon.png', sizes: '180x180', type: 'image/png' }
+    ],
+    other: [
+      { rel: 'mask-icon', url: '/custom-icon.png', color: '#ea580c' }
+    ]
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-    siteName: 'FoodDelivery',
-    title: 'FoodDelivery - Delicious Food Delivered Fast',
-    description: 'Order your favorite dishes from our restaurant and get them delivered right to your doorstep in no time.',
+    siteName: 'Shangrila Restaurant',
+    title: 'Shangrila Restaurant - Elevating Desi Cuisine Since 1989',
+    description: 'Authentic Pakistani cuisine in Lahore since 1989. Experience the best desi flavors with our signature dishes like Fari Daal, Kalagi, and Mutton Joint.',
     images: [
       {
         url: '/assets/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'FoodDelivery - Delicious Food',
+        alt: 'Shangrila Restaurant - Authentic Pakistani Cuisine',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FoodDelivery - Delicious Food Delivered Fast',
-    description: 'Order your favorite dishes from our restaurant and get them delivered right to your doorstep in no time.',
+    title: 'Shangrila Restaurant - Elevating Desi Cuisine Since 1989',
+    description: 'Authentic Pakistani cuisine in Lahore since 1989. Experience the best desi flavors with traditional recipes and modern precision.',
     images: ['/assets/images/og-image.jpg'],
   },
   verification: {
@@ -61,6 +76,13 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  },
+  manifest: '/manifest.json',
+  themeColor: '#ea580c',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
   },
   category: 'food and drink',
   classification: 'restaurant, food delivery service',
@@ -83,13 +105,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/logo192.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#ea580c" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
       <body className="font-sans antialiased">
         <StructuredData />
         <ErrorBoundary>

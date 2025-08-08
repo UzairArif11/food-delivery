@@ -1,21 +1,21 @@
 {
-  "short_name": "FoodDelivery",
-  "name": "FoodDelivery - Delicious Food Delivered Fast",
-  "description": "Order your favorite dishes online with fast delivery",
+  "short_name": "Shangrila Restaurant",
+  "name": "Shangrila Restaurant - Elevating Desi Cuisine Since 1989",
+  "description": "Authentic Pakistani cuisine in Lahore since 1989. Order Shangrila's legendary Fari Daal, Shahi Daal, and traditional desi dishes",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "custom-icon.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
+      "src": "custom-icon.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "maskable any"
     },
     {
-      "src": "logo512.png",
+      "src": "custom-icon.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable any"

@@ -6,11 +6,11 @@ import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Home',
-  description: 'Order delicious food online with fast delivery. Fresh ingredients, quality dishes, and exceptional service delivered to your door.',
-  keywords: 'food delivery, online ordering, restaurant, fast delivery, quality food',
+  description: 'Since 1989, Shangrila has been Lahore\'s go-to destination for authentic Pakistani cuisine. Order our legendary Fari Daal, Shahi Daal, Kalagi, and Mutton Joint for fast delivery.',
+  keywords: 'shangrila restaurant lahore, pakistani food delivery, desi cuisine, fari daal, shahi daal, authentic pakistani dishes, mozang anarkali restaurant, lahore food delivery',
   openGraph: {
-    title: 'FoodDelivery - Order Food Online',
-    description: 'Get your favorite dishes delivered fast with exceptional quality and service.',
+    title: 'shangrilaresturant - Authentic Pakistani Cuisine Since 1989',
+    description: 'Experience the best desi flavors in Lahore. Order our signature dishes like Fari Daal, Kalagi, and traditional Pakistani cuisine.',
     images: ['/assets/images/home-og.jpg'],
   },
 };

@@ -4,16 +4,17 @@ const StructuredData = () => {
   const restaurantSchema = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
-    "name": "FoodDelivery",
-    "description": "Delicious food delivered fast with fresh ingredients and exceptional service",
+    "name": "Shangrila Restaurant",
+    "alternateName": "shangrilaresturant",
+    "description": "Since 1989, Shangrila has been Lahore's go-to destination for authentic Pakistani cuisine. Founded by Muhammad Zafar and now run by Chaudhary Ishrat Mahmood.",
     "url": process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.com",
     "logo": `${process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.com"}/logo192.png`,
     "image": `${process.env.NEXT_PUBLIC_SITE_URL || "https://your-domain.com"}/assets/images/og-image.jpg`,
     "telephone": "+92-42-123-4567",
-    "email": "info@fooddelivery.com",
+    "email": "info@shangrilaresturant.com",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "H856+M3J, Mozang Chungi",
+      "streetAddress": "Mozang Anarkali",
       "addressLocality": "Lahore",
       "addressRegion": "Punjab",
       "postalCode": "54000",
@@ -27,9 +28,9 @@ const StructuredData = () => {
     "openingHours": [
       "Mo-Su 09:00-23:00"
     ],
-    "priceRange": "$",
-    "servesCuisine": "International",
-    "acceptsReservations": false,
+    "priceRange": "$$",
+    "servesCuisine": ["Pakistani", "Desi", "South Asian"],
+    "acceptsReservations": true,
     "hasDeliveryService": {
       "@type": "DeliveryService",
       "deliveryArea": {
@@ -48,9 +49,9 @@ const StructuredData = () => {
       "reviewCount": "247"
     },
     "sameAs": [
-      "https://facebook.com/fooddelivery",
-      "https://instagram.com/fooddelivery",
-      "https://twitter.com/fooddelivery"
+      "https://facebook.com/shangrilaresturant",
+      "https://instagram.com/shangrilaresturant",
+      "https://twitter.com/shangrilaresturant"
     ]
   };
 

@@ -15,10 +15,10 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-primary">TasteBuds</h3>
+            <h3 className="text-2xl font-bold text-primary">Shangrila Restaurant</h3>
             <p className="text-gray-300">
-              Delicious food delivered to your doorstep. Experience the finest 
-              culinary delights from our kitchen to your table.
+              Since 1989, Shangrila has been Lahore's go-to destination for authentic Pakistani cuisine. 
+              From our legendary Fari Daal to traditional desi flavors, every plate celebrates our culinary heritage.
             </p>
             <div className="flex space-x-4">
               <a 
@@ -89,13 +89,13 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <span className="text-primary">✉️</span>
-                <span className="text-gray-300">info@fooddelivery.pk</span>
+                <span className="text-gray-300">info@shangrilaresturant.com</span>
               </div>
               <div className="flex items-start space-x-3">
                 <span className="text-primary mt-1">📍</span>
                 <span className="text-gray-300">
-                  H856+M3J, Mozang Chungi<br />
-                  Lahore, Punjab 54000
+                  Mozang Anarkali<br />
+                  Lahore, Punjab, Pakistan
                 </span>
               </div>
             </div>
@@ -125,7 +125,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © {currentYear} FoodDelivery. All rights reserved.
+              © {currentYear} Shangrila Restaurant. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link 
