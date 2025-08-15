@@ -49,7 +49,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/assets/images/cooking-food-concept-smiling-female-chef-cook-baker-with-fork-tomato-showing-ok-sign 1.png"
+                src="/assets/images/ok2.webp"
                 alt="Our chef preparing food with care"
                 fill
                 className="object-cover"
@@ -76,7 +76,7 @@ export default function AboutPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Signature Desi Taste</h3>
+              <h3 className="text-xl font-semibold mb-2">Chef’s Recommendations</h3>
               <p className="text-gray-600">From Shahi Daal to Kalagi and Mutton Joint, every dish is made from timeless recipes with modern-day precision. It's not just food — it's a taste that reminds you of home.</p>
             </div>
             
