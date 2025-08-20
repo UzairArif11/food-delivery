@@ -74,7 +74,7 @@ print_status "Reloading Nginx..."
 sudo nginx -t && sudo systemctl reload nginx
 
 print_status "🎉 Deployment completed successfully!"
-print_status "🌐 Your site should be available at: https://foodpanda.site"
+print_status "🌐 Your site should be available at: https://shangrilaresturant.com"
 
 # Show service logs
 print_status "Recent service logs:"
@@ -86,7 +86,7 @@ print_status "Reloading Nginx..."
 sudo nginx -t && sudo systemctl reload nginx
 
 print_status "🎉 Deployment completed successfully!"
-print_status "🌐 Your site should be available at: https://foodpanda.site"
+print_status "🌐 Your site should be available at: https://shangrilaresturant.com"
 
 # Show systemd service status
 print_status "🔍 Checking systemd service status..."
@@ -98,4 +98,4 @@ sudo journalctl -u food-delivery-frontend --no-pager -n 10
 
 # Test domain with curl
 print_status "🌐 Testing live site with curl..."
-curl -I https://foodpanda.site
+curl -I https://shangrilaresturant.com
