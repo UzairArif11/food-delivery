@@ -13,7 +13,7 @@ module.exports = {
     env_production: {
       NODE_ENV: 'production',
       PORT: 5000,
-      FRONTEND_URL: 'https://foodpanda.site',
+      FRONTEND_URL: 'https://shangrilaresturant.com',
       MONGO_URI: 'mongodb://localhost:27017/food-ordering-app'
     },
     // Logging

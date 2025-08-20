@@ -20,8 +20,8 @@ const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:3001',
   'http://127.0.0.1:3000',
-  'https://foodpanda.site',
-  'https://www.foodpanda.site'
+  'https://shangrilaresturant.com',
+  'https://www.shangrilaresturant.com'
 ];
 
 // Add environment-specific origins
@@ -76,8 +76,8 @@ const staticOptions = {
     const allowedOrigins = [
       'http://localhost:3000',
       'http://localhost:3001', 
-      'https://foodpanda.site',
-      'https://www.foodpanda.site'
+      'https://shangrilaresturant.com',
+      'https://www.shangrilaresturant.com'
     ];
     
     const origin = res.req.get('Origin');

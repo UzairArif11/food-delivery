@@ -80,9 +80,9 @@ fi
 # Test 6: Test NGINX Image Proxy
 print_test "Testing NGINX Image Proxy"
 if [ ! -z "$SAMPLE_IMAGE" ]; then
-    if curl -f -I "https://foodpanda.site/uploads/$SAMPLE_IMAGE" 2>/dev/null; then
+    if curl -f -I "https:// shangrilaresturant.com/uploads/$SAMPLE_IMAGE" 2>/dev/null; then
         print_success "NGINX proxies images correctly"
-        curl -I "https://foodpanda.site/uploads/$SAMPLE_IMAGE" 2>/dev/null | head -5
+        curl -I "https:// shangrilaresturant.com/uploads/$SAMPLE_IMAGE" 2>/dev/null | head -5
     else
         print_error "NGINX cannot proxy images"
         echo "Checking NGINX error logs:"
@@ -92,10 +92,10 @@ fi
 
 # Test 7: Check API Categories Response
 print_test "Testing Categories API Response"
-if curl -f -s "https://foodpanda.site/api/v1/categories" > /dev/null; then
+if curl -f -s "https:// shangrilaresturant.com/api/v1/categories" > /dev/null; then
     print_success "Categories API is accessible"
     echo "Sample category data:"
-    curl -s "https://foodpanda.site/api/v1/categories" | head -200
+    curl -s "https:// shangrilaresturant.com/api/v1/categories" | head -200
 else
     print_error "Categories API is not accessible"
 fi
@@ -113,7 +113,7 @@ fi
 
 # Test 9: Test Frontend Response
 print_test "Testing Frontend Response"
-if curl -f -s https://foodpanda.site > /dev/null; then
+if curl -f -s https:// shangrilaresturant.com > /dev/null; then
     print_success "Frontend is accessible"
 else
     print_error "Frontend is not accessible"

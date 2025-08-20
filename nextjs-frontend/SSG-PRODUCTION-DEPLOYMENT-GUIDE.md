@@ -88,7 +88,7 @@ echo "🚀 Starting SSG Deployment..."
 # Configuration
 SITE_DIR="/var/www/food-frontend-static"
 APP_DIR="/opt/food-ordering-app/nextjs-frontend"
-NGINX_CONFIG="/etc/nginx/sites-available/foodpanda.site"
+NGINX_CONFIG="/etc/nginx/sites-available/ shangrilaresturant.com"
 BACKUP_DIR="/opt/backups/frontend-static"
 
 # Colors for output
@@ -164,7 +164,7 @@ else
 fi
 
 log_info "🎉 SSG Deployment completed successfully!"
-log_info "Site should be available at: https://foodpanda.site"
+log_info "Site should be available at: https:// shangrilaresturant.com"
 log_info "Static files location: $SITE_DIR"
 
 echo ""
@@ -174,7 +174,7 @@ echo "  • Files count: $(find $SITE_DIR -type f | wc -l)"
 echo "  • Deployment time: $(date)"
 
 log_info "🔍 Testing site availability..."
-if curl -f -s https://foodpanda.site > /dev/null; then
+if curl -f -s https:// shangrilaresturant.com > /dev/null; then
     log_info "✅ Site is accessible"
 else
     log_warn "⚠️  Site might not be fully available yet (check nginx logs if issues persist)"
@@ -205,7 +205,7 @@ sudo nginx -t
 sudo systemctl reload nginx
 
 print_status "🎉 SSG deployment completed successfully!"
-print_status "🌐 Your static site is available at: https://foodpanda.site"
+print_status "🌐 Your static site is available at: https:// shangrilaresturant.com"
 
 # Show build info
 print_status "Build information:"
@@ -225,19 +225,19 @@ Create `nginx-ssg.conf`:
 # HTTP to HTTPS redirect
 server {
     listen 80;
-    server_name foodpanda.site www.foodpanda.site;
-    return 301 https://foodpanda.site$request_uri;
+    server_name  shangrilaresturant.com www. shangrilaresturant.com;
+    return 301 https:// shangrilaresturant.com$request_uri;
 }
 
 # HTTPS server for static files
 server {
     listen 443 ssl http2;
-    server_name foodpanda.site www.foodpanda.site;
+    server_name  shangrilaresturant.com www. shangrilaresturant.com;
     
     # SSL Configuration
-    ssl_certificate /etc/letsencrypt/live/foodpanda.site/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/foodpanda.site/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/foodpanda.site/chain.pem;
+    ssl_certificate /etc/letsencrypt/live/ shangrilaresturant.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ shangrilaresturant.com/privkey.pem;
+    ssl_trusted_certificate /etc/letsencrypt/live/ shangrilaresturant.com/chain.pem;
     
     # SSL Security
     ssl_protocols TLSv1.2 TLSv1.3;
@@ -358,7 +358,7 @@ chmod +x deploy-ssg.sh
 ./deploy-ssg.sh
 
 # 6. Verify deployment
-curl -I https://foodpanda.site
+curl -I https:// shangrilaresturant.com
 ```
 
 ### **Future Updates:**

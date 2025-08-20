@@ -24,7 +24,7 @@ export const getImageUrl = (imagePath: string, fallback = '/assets/images/placeh
     if (isProduction) {
       // In production, try multiple URL patterns based on NGINX configuration
       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-                     (typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.hostname}` : 'https://foodpanda.site');
+                     (typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.hostname}` : 'https:// shangrilaresturant.com');
       
       // The NGINX configuration serves images at /uploads/ path
       imageUrl = `${siteUrl}${imagePath}`;
@@ -60,7 +60,7 @@ export const getImageUrlWithFallbacks = (imagePath: string): string[] => {
   if (isProduction) {
     const baseUrl = typeof window !== 'undefined' ? 
       `${window.location.protocol}//${window.location.hostname}` : 
-      'https://foodpanda.site';
+      'https:// shangrilaresturant.com';
     
     return [
       `${baseUrl}${imagePath}`,                    // Direct NGINX proxy

@@ -8,7 +8,7 @@ const nextConfig = {
     // WHY: Disable image optimization for static export
     unoptimized: true,
     // WHY: Allows images from these domains to be optimized by Next.js
-    domains: ['localhost', '127.0.0.1', 'foodpanda.site', 'www.foodpanda.site'],
+    domains: ['localhost', '127.0.0.1', 'shangrilaresturant.com', 'www.shangrilaresturant.com'],
     remotePatterns: [
       {
         // WHY: Development - allows loading images from local backend
@@ -20,13 +20,13 @@ const nextConfig = {
       {
         // WHY: Production - allows loading images from live backend
         protocol: 'https',
-        hostname: 'foodpanda.site',
+        hostname: 'shangrilaresturant.com',
         pathname: '/uploads/**',
       },
       {
         // WHY: Production - allows loading images from live backend API
         protocol: 'https',
-        hostname: 'foodpanda.site',
+        hostname: 'shangrilaresturant.com',
         pathname: '/api/v1/uploads/**',
       }
     ],

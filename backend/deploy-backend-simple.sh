@@ -44,7 +44,7 @@ pm2 delete $APP_NAME 2>/dev/null || true
 
 # Start application with PM2 (simple approach)
 print_status "Starting application with PM2..."
-NODE_ENV=production PORT=5000 FRONTEND_URL=https://foodpanda.site pm2 start server.js --name $APP_NAME
+NODE_ENV=production PORT=5000 FRONTEND_URL=https:// shangrilaresturant.com pm2 start server.js --name $APP_NAME
 
 # Save PM2 configuration
 print_status "Saving PM2 configuration..."

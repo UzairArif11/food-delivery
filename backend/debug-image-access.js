@@ -29,9 +29,9 @@ if (fs.existsSync(uploadsDir)) {
       `http://localhost:5000/uploads/${sampleFile}`,
       `http://localhost:5000/v1/uploads/${sampleFile}`,
       `http://localhost:5000/api/uploads/${sampleFile}`,
-      `https://foodpanda.site/uploads/${sampleFile}`,
-      `https://foodpanda.site/api/v1/uploads/${sampleFile}`,
-      `https://www.foodpanda.site/uploads/${sampleFile}`
+      `https:// shangrilaresturant.com/uploads/${sampleFile}`,
+      `https:// shangrilaresturant.com/api/v1/uploads/${sampleFile}`,
+      `https://www. shangrilaresturant.com/uploads/${sampleFile}`
     ];
     
     console.log('\n2. URL PATTERNS TO TEST:');

@@ -69,10 +69,10 @@ if [ -d "$UPLOAD_DIR" ]; then
         fi
         
         # Test through nginx
-        if curl -s "https://foodpanda.site/uploads/$SAMPLE_FILE" > /dev/null; then
-            echo "   ✅ https://foodpanda.site/uploads/$SAMPLE_FILE"
+        if curl -s "https:// shangrilaresturant.com/uploads/$SAMPLE_FILE" > /dev/null; then
+            echo "   ✅ https:// shangrilaresturant.com/uploads/$SAMPLE_FILE"
         else
-            echo "   ❌ https://foodpanda.site/uploads/$SAMPLE_FILE"
+            echo "   ❌ https:// shangrilaresturant.com/uploads/$SAMPLE_FILE"
         fi
     else
         echo "❌ No files in uploads directory"

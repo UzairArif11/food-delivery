@@ -9,14 +9,14 @@ Add these headers to your nginx server block:
 ```nginx
 server {
     listen 80;
-    server_name foodpanda.site www.foodpanda.site;
+    server_name  shangrilaresturant.com www. shangrilaresturant.com;
     
     # Security Headers
     add_header X-Frame-Options "DENY" always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
     add_header X-XSS-Protection "1; mode=block" always;
-    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://foodpanda.site;" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:// shangrilaresturant.com;" always;
     
     # Static files location
     root /var/www/foodpanda/out;
@@ -57,7 +57,7 @@ Header always set Referrer-Policy "strict-origin-when-cross-origin"
 Header always set X-XSS-Protection "1; mode=block"
 
 # Content Security Policy
-Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://foodpanda.site;"
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:// shangrilaresturant.com;"
 
 # Enable mod_rewrite
 RewriteEngine On

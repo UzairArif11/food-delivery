@@ -44,7 +44,7 @@ sudo nginx -t
 sudo systemctl reload nginx
 
 print_status "🎉 SSG deployment completed successfully!"
-print_status "🌐 Your static site is available at: https://foodpanda.site"
+print_status "🌐 Your static site is available at: https:// shangrilaresturant.com"
 
 # Show build info
 print_status "Build information:"

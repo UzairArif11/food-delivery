@@ -195,8 +195,8 @@ const apiBase = getApiBaseUrl();
 ### **Production Checklist** ✅
 ```bash
 # 1. Environment Variables Set
-✅ NEXT_PUBLIC_API_URL=https://foodpanda.site/api/v1
-✅ NEXT_PUBLIC_SITE_URL=https://foodpanda.site
+✅ NEXT_PUBLIC_API_URL=https:// shangrilaresturant.com/api/v1
+✅ NEXT_PUBLIC_SITE_URL=https:// shangrilaresturant.com
 
 # 2. Build Process
 ✅ npm run build  # Should complete without console statement warnings

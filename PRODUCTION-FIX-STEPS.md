@@ -98,10 +98,10 @@ sudo systemctl reload nginx
 ### 9. Test through nginx
 ```bash
 # Test API endpoint through nginx
-curl https://foodpanda.site/api/v1/health
+curl https:// shangrilaresturant.com/api/v1/health
 
 # Test image through nginx (replace with actual filename)
-curl -I https://foodpanda.site/uploads/image-1752085416391-807017545.jpg
+curl -I https:// shangrilaresturant.com/uploads/image-1752085416391-807017545.jpg
 ```
 
 ### 10. Check logs if still not working
@@ -165,9 +165,9 @@ sudo systemctl start nginx
 ## Quick Test Commands
 
 Once everything is running, test these URLs in your browser:
-- `https://foodpanda.site/api/v1/health` - Should return JSON
-- `https://foodpanda.site/uploads/[filename].jpg` - Should show image
-- `https://www.foodpanda.site/api/v1/health` - Should also work
+- `https:// shangrilaresturant.com/api/v1/health` - Should return JSON
+- `https:// shangrilaresturant.com/uploads/[filename].jpg` - Should show image
+- `https://www. shangrilaresturant.com/api/v1/health` - Should also work
 
 ## Emergency Fallback
 
@@ -185,5 +185,5 @@ Then rebuild and restart your frontend.
 
 If you're still having issues, run this command and share the output:
 ```bash
-curl -v https://foodpanda.site/api/v1/health
+curl -v https:// shangrilaresturant.com/api/v1/health
 ```

@@ -6,4 +6,4 @@ Disallow: /api/
 Disallow: /cart/
 
 # Sitemap
-Sitemap: https://foodpanda.site/sitemap.xml
+Sitemap: https:// shangrilaresturant.com/sitemap.xml
